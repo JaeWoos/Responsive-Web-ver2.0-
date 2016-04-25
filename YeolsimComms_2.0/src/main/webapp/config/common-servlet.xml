@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+				http://www.springframework.org/schema/beans/spring-beans.xsd
+				
+				http://www.springframework.org/schema/context 
+				http://www.springframework.org/schema/context/spring-context.xsd
+				
+				http://www.springframework.org/schema/mvc
+				http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- :: 공통적인 사항을 설정한 common-servlet.xml 사용. -->
+
+	<!-- ㅇ 어노테이션 기반 :: Spring Framework 사용. ㅇ @Controller annotation 선언된 Bean 
+		만 Wiring ㅇ @Service / @Repository annotation 선언된 Bean 은 Scan 제외 -->
+	<context:component-scan base-package="yeolsim.web">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Repository" />
+	</context:component-scan>
+	
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:default-servlet-handler/>
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	
+	
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+	    <property name="contentNegotiationManager" ref="contentNegotiationManager"/>
+	    <property name="viewResolvers">
+	        <list>
+	            <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	            <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	                <property name="prefix" value="/WEB-INF/jsp"/>
+	                <property name="suffix" value=".jsp"/>
+	            </bean>
+	        </list>
+	    </property>
+	    
+	    <property name="defaultViews">
+	        <list>
+	            <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" />
+	        </list>
+	    </property>
+  	</bean>
+  	
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+    <property name="favorPathExtension" value="false" />
+    <property name="favorParameter" value="true" />
+    <property name="mediaTypes">
+		<map>
+			<entry key="html" value="text/html" />
+			<entry key="json" value="application/json" />
+			<entry key="xml" value="application/xml" />
+		</map>
+	</property>
+  </bean>
+
+
+</beans>
