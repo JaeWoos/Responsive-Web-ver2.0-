@@ -22,5 +22,17 @@
 				    #{id} , #{password} , #{name}, #{phone}, #{email},
 				    #{sex}, #{addr}
 				   )
-	 </insert>
+	</insert>
+	 
+	<select id="getMember" parameterType="String" resultMap="memberResultMap">
+		SELECT	* FROM member
+		<where>
+			ID =#{id}
+		</where> 
+	</select>
+	
 </mapper>
+
+
+
+

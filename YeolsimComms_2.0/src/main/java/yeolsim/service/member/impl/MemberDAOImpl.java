@@ -37,7 +37,8 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public Member getMember(String memberId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("getMember :"+memberId);
+		return sqlSeesion.selectOne("MemberMapper.getMember", memberId);
 	}
 
 	@Override

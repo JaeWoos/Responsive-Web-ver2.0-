@@ -63,22 +63,37 @@
 				var temp=$("#addMember")
 				console.log(temp)
 				document.getElementById("addMember").action="/member/insertMember"; 
-				/* var temp=$('#addMember')
-				var data = getFormData(temp)
-				console.log("gg"+data);
-				$.ajax({
-					type:"POST",
-					url:"/member/insertMember",
-					data:JSON.stringify(data),
-					dataType:"json",
-					contentType:"application/json; charset=utf-8",
-					success:function(data){
-						console.log("ggg"+data)
-					},
-				});  */
+
 		}
 		
     window.onload = function(){ 
+		
+    	//아이디 중복 체크
+		$('#id').focusout(function(){
+			var id=$(this).val();
+			console.log("gg"+id)
+			$("#check").children().remove();
+			$.ajax({
+				type:"POST",
+				url:"/member/check",
+				dataType: "json",
+				data:{
+					id
+				},
+				async:false,
+				success:function(data, status){
+					console.log(data.check)
+ 					if(data.check==true){
+ 						console.log("1")
+						$('#check').append("<b>사용 가능한 아이디 입니다.<b>")
+						
+					}else{
+						console.log("2")
+						$('#check').append("<b>이미 사용 중인 아이디 입니다.<b>")
+					}
+				},
+			})
+		})
 		 $('#id').focusout(function(event){
              var divId = $('#divId');
              var temp=$("#id").val();
@@ -202,6 +217,7 @@
                 <label for="inputId" class="col-lg-2 control-label">아이디</label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control onlyAlphabetAndNumber" id="id"  name="id" data-rule-required="true" placeholder="영어 숫자 포함" maxlength="30">
+					<div id="check"></div>
                 </div>
             </div>
             <div class="form-group" id="divPassword">

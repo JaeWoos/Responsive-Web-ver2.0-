@@ -30,15 +30,15 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member loginMember(Member member) throws Exception {
+	public Member loginMember(String memberId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getMember(memberId);
 	}
 
 	@Override
 	public Member getMember(String memberId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getMember(memberId);
 	}
 
 	@Override
