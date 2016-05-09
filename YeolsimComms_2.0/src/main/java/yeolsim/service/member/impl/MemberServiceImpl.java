@@ -42,9 +42,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member updateMember(Member member) throws Exception {
+	public void updateMember(Member member) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		memberDao.updateMember(member);
 	}
 
 	public static void main(String[] args) {

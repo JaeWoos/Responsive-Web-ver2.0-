@@ -1,5 +1,6 @@
 package yeolsim.service.product;
 
+import java.util.List;
 import java.util.Map;
 
 import yeolsim.service.domain.Product;
@@ -17,8 +18,8 @@ public interface ProductService {
 	
 	//select
 	public Product getProduct(int prodNo) throws Exception;
-	public Map<String,Object> getProductList(int memberNo) throws Exception;
-	Map<String, Object> getAllProductList() throws Exception;
+	public List<Product> getProductList(int memberNo) throws Exception;
+	public Map<String, Object> getAllProductList() throws Exception;
 	
 	
 }

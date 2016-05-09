@@ -94,6 +94,22 @@
 				},
 			})
 		})
+		
+	    $("#login").click(function(){
+	    	var id=$("#navbar .form-group").find("input[name='Id']").val();
+			var pw=$("#navbar .form-group").find("input[name='password']").val();
+	
+			if(id == null || id.length <1) {
+				alert('ID 를 확인하세요.');
+				$("#navbar .form-group").find("input[name='Id']").focus();
+			}
+			if(pw == null || pw.length <1) {
+				alert('패스워드를 입력하지 않으셨습니다.');
+				$("#navbar .form-group").find("input[name='userId']").focus();
+			}
+	    })
+	    }
+    
 		 $('#id').focusout(function(event){
              var divId = $('#divId');
              var temp=$("#id").val();
@@ -178,7 +194,6 @@
                  divPhoneNumber.addClass("has-success");
              }
          });
-    }
 	</script>    
 </head>
 <body>
@@ -197,15 +212,15 @@
              <a class="navbar-brand" href="/index.jsp">Yeolsim Shop </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
+         <form class="navbar-form navbar-right" id="loginform" action="/member/login" method="post">
             <div class="form-group">
-              <input type="text" placeholder="ID" name="userId" class="form-control">
+              <input type="text" placeholder="ID" name="Id" class="form-control">
             </div>
             <div class="form-group">
               <input type="password" placeholder="Password" name="password" class="form-control">
             </div>
-		      <button id="login" type="submit" class="btn btn-success">Sign in</button>
-		       <button id="member" type="submit" class="btn btn-success">Sign up</button>
+		      <button id="login" type="submit" class="btn btn-success" >Sign in</button>
+		       <a href="/member/insertMember"><button id="member" type="button" class="btn btn-success">Sign up</button></a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>

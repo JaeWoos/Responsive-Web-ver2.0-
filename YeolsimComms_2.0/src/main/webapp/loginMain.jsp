@@ -5,12 +5,6 @@
 <%@ page import="yeolsim.service.domain.Member" %>
 <%@ page import="yeolsim.service.domain.Product" %>
 
-<%
-	Member member = (Member)session.getAttribute("member");
-/* 	List<Product> list= (List<Product>)request.getAttribute("product");
-	List<Member> memList= (List<Member>)request.getAttribute("member"); */
-%>	   
- 
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -48,15 +42,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/login.do">Yeolsim Shop</a>
+          <a class="navbar-brand" href="/member/login">Yeolsim Shop</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" action="/member/logout" method="get">
             <div class="form-group">
-              <span  style="color: wheat;"><%=member.getId() %>(<%= member.getName() %>)님 환영 합니다.</span>
+              <span  style="color: wheat;">${member.id}(${member.name})님 환영 합니다.</span>
             </div>
               <button id="login" type="submit" class="btn btn-success" >Sign out</button>
-              <a href="/listProduct.do?userId=<%=member.getId()%>"><button id="addProduct" type="button" class="btn btn-success" >상품관리</button></a>
+              <a href="/product/myMenu"><button id="addProduct" type="button" class="btn btn-success" >상품관리</button></a>
 		    
           </form>
         </div><!--/.navbar-collapse -->
@@ -68,7 +62,7 @@
             <div class="col-md-9" style="margin-left: 10%;">
             
                 <div class="row carousel-holder">
-<%--                     <div class="col-md-12">
+                    <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -76,29 +70,17 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                             </ol>
                             <div class="carousel-inner">
-                                 <% if(list.size()==0) { %>
+                               
                                 <div class="item active">
-                                    <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                                </div>
-                             <% }else{ 
-                            	List<Product> randomList=new ArrayList<Product>();
-                            	  Random ra = new Random();
-                            	  int mainSize= list.size(); 
-                            	  for(int i=0; i<mainSize ;i++){
-                            	   int rv = ra.nextInt(list.size());
-                            	   randomList.add(list.get(rv));
-                            	  }
-                            	%>      	
-                                <div class="item active">
-                                    <img class="slide-image" src="/img/<%= randomList.get(0).getPic() %>" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[0].pic}" style="width: 800px; height: 300px;">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/img/<%= randomList.get(1).getPic() %>" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[1].pic}" style="width: 800px; height: 300px;">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/img/<%= randomList.get(2).getPic() %>" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[2].pic}" style="width: 800px; height: 300px;">
                                 </div>
-                                <%} %>
+                              
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -107,54 +89,27 @@
                                 <span class="glyphicon glyphicon-chevron-right"></span>
                             </a>
                         </div>
-                    </div> --%>
+                    </div> 
 
                 </div>
 
                 <div class="row">
-<%--                     <%	if(list.size()==0 || memList==null){ %>
-                    	 <div class="col-sm-4 col-lg-4 col-md-4">
-                         <div class="thumbnail">
-                             <img src="http://placehold.it/320x150" alt="">
-                             <div class="caption">
-                                 <h4 class="pull-right">$24.99</h4>
-                                 <h4><a href="#">최초 물건을 등록해 주세요</a>
-                                 </h4>
-                                 <p>See more snippets like this online store item at <a target="_blank" href="http://www.bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                             </div>
-                             <div class="ratings">
-                                 <p class="pull-right">15 reviews</p>
-                                 <p>
-                                     <span class="glyphicon glyphicon-star"></span>
-                                     <span class="glyphicon glyphicon-star"></span>
-                                     <span class="glyphicon glyphicon-star"></span>
-                                     <span class="glyphicon glyphicon-star"></span>
-                                     <span class="glyphicon glyphicon-star"></span>
-                                 </p>
-                             </div>
-                         </div>
-                     </div>
-                    	
-                   <% }else{                     
-							for(int i=0; i<list.size(); i++) {
-								Product product = list.get(i);
-									for(int j=0 ; j<memList.size(); j++){
-										Member mem=memList.get(j);
-										if(product.getMemberNo()==mem.getMemberNo()){
-											%>
+					<c:forEach var="product" items="${product }">
+					 <c:forEach var="men" items="${allMember }">
+					 <c:if test="${product.memberNo==men.memberNo}">
 					 <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                        <a href="/getProduct.do?prodNo=<%=product.getProdNo()%>">
-                            <img src="/img/<%=product.getPic() %>" alt="" style="width: 320px; height: 200px;">
+                        <a href="/product/getProduct/${product.prodNo }">
+                            <img src="/resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;">
                               <div class="caption">
-                                <h4 class="pull-right"><%=product.getPrice() %> 원</h4>
-                                <h4 title="<%=product.getProdName() %>" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                			<%=product.getProdName() %>
+                                <h4 class="pull-right">${product.price } 원</h4>
+                                <h4 title="${product.prodName }" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                			${product.prodName }
                                 </h4>
-                                <p><%=product.getInfo() %></p>
+                                <p>${product.info }</p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right"><%=mem.getId() %>(<%=mem.getName() %>)</p>
+                                <p class="pull-right">${men.id }(${men.name })</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
@@ -166,13 +121,9 @@
                             </a>
                         </div>
                     </div>
-			<%								
-										}
-									}
-								}
-                    }
-				
-	 		 %>	  --%>
+                    </c:if>
+                    </c:forEach>
+				</c:forEach>
                 </div>
             </div>
         </div>
@@ -191,6 +142,5 @@
 
     </div>
     <!-- /.container -->
-
 </body>
 </html>

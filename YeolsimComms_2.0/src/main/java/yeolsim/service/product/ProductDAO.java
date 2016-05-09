@@ -25,6 +25,6 @@ public interface ProductDAO {
 	
 	//select
 	public Product getProduct(int probNo)throws Exception;
-	public Map<String, Object> getProductList(int memberNo)throws Exception;		
-	public List<Product> getProductList()throws Exception;
+	public List<Product> getProductList(int memberNo)throws Exception;		
+	public List<Product> getAllProductList()throws Exception;
 }

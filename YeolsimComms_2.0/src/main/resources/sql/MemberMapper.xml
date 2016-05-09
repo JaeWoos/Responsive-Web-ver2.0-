@@ -24,11 +24,24 @@
 				   )
 	</insert>
 	 
+	<update id="updateMember" parameterType="member">
+		UPDATE	member
+		SET PASSWORD=#{password} , NAME=#{name} , PHONE=#{phone} , EMAIL=#{email},
+						 SEX=#{sex} , ADDR=#{addr} 
+		<where>
+			Member_no=#{memberNo}
+		</where>
+	</update> 
+	 
 	<select id="getMember" parameterType="String" resultMap="memberResultMap">
 		SELECT	* FROM member
 		<where>
 			ID =#{id}
 		</where> 
+	</select>
+	
+	<select id="getAllMember" parameterType="String" resultMap="memberResultMap">
+		SELECT	* FROM member
 	</select>
 	
 </mapper>

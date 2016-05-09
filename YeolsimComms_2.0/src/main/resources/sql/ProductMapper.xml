@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd.mybatis-3-config.dtd">
+
+<mapper namespace="ProductMapper">
+
+	<resultMap id="ProductResultMap" type="Product">
+		<result property="prodNo" 		column="PROD_NO" 		jdbcType="INTEGER"/>
+		<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
+		<result property="prodName"		column="PRODNAME" 		jdbcType="VARCHAR" />
+		<result property="price"		column="PRICE" 			jdbcType="INTEGER" />
+		<result property="info"			column="INFO" 			jdbcType="VARCHAR" />
+		<result property="pic"			column="PIC" 			jdbcType="VARCHAR" />
+		<result property="data"			column="DATA" 			jdbcType="DATE" />
+		<result property="stat"			column="STAT" 			jdbcType="INTEGER" />
+		<result property="cate"			column="CATE" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<!-- SQL : INSERT -->
+	<insert		id="insertProduct"	parameterType="Product" >
+	 	INSERT
+		INTO Product
+		VALUES	 (	seq_Product_prod_no.nextval,
+				    #{memberNo} , #{prodName} , #{price}, #{info}, #{pic},
+				    SYSDATE, 0, #{cate}
+				   )
+	</insert>
+	
+	<update id="updateProduct" parameterType="Product">
+		UPDATE PRODUCT SET PRODNAME=#{prodName}, price=#{price}, info=#{info}
+		<where>
+			prod_no=#{prodNo}		
+		</where>
+	</update>
+	
+	<select id="getProduct" parameterType="int" resultMap="ProductResultMap">
+		SELECT *FROM PRODUCT WHERE PROD_NO=#{value}
+	</select>
+	 
+	<select id="getProductList" parameterType="int" resultMap="ProductResultMap">
+		select *from Product
+		<where>
+			member_no=#{value}
+		</where>
+	</select>
+	
+	<select id="getAllProductList" resultMap="ProductResultMap">
+		select *from Product
+	</select>
+	
+	
+</mapper>
+
+
+
+

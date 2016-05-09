@@ -12,7 +12,7 @@ public class Product {
 	private int price;
 	private String info;
 	private String pic;
-	private Date date;
+	private Date data;
 	private String stat;
 	private String cate;
 
@@ -85,17 +85,17 @@ public class Product {
 	}
 
 	public Date getDate() {
-		return date;
+		return data;
 	}
 
 	public void setDate(Date date) {
-		this.date = date;
+		this.data = date;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [prodNo=" + prodNo + ", memberNo=" + memberNo + ", prodName=" + prodName + ", price=" + price
-				+ ", info=" + info + ", pic=" + pic + ", date=" + date + ", stat=" + stat + ", cate=" + cate + "]";
+				+ ", info=" + info + ", pic=" + pic + ", date=" + data + ", stat=" + stat + ", cate=" + cate + "]";
 	}
 
 }

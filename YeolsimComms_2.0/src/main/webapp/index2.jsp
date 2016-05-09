@@ -9,7 +9,7 @@
 <%@ page import="yeolsim.service.product.impl.ProductServiceImpl" %>
 <%@ page import="yeolsim.service.product.impl.ProductDAOImpl" %>
 
-
+  
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,29 +26,10 @@
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
     
     <script type="text/javascript">
-   		window.location.replace('/product/start')
+   	
    		window.onload = function(){ 
-  		  /*  $.ajax({
-			   type:"GET",
-			   url:"/product/start",
-			   dataType:"json",
-			   success:function(data, status){
-				   var product=data.product
-				   var allMember=data.allMember
-				   console.log(product)
-				   console.log(allMember)
-
-			   }
-			   })  
-			start();
-		   } */
-			
-   //	function loginProduct(){
-   //		var temp=<%=session.getAttribute("member")%>
-   // 	alert("로그인 후 이용하세요");
-   //	}	
-		   }
-
+   			
+   		}
 	</script>    
     
 </head>
@@ -75,7 +56,7 @@
             <div class="form-group">
               <input type="password" placeholder="Password" name="password" class="form-control">
             </div>
-		      <button id="login" type="submit" class="btn btn-success" >Sign in ${product }</button>
+		      <button id="login" type="submit" class="btn btn-success" >Sign in</button>
 		       <a href="/member/insertMember"><button id="member" type="button" class="btn btn-success">Sign up</button></a>
           </form>
         </div><!--/.navbar-collapse -->
@@ -97,20 +78,22 @@
                             </ol>
                             <div class="carousel-inner" >
                                <c:choose>
-                               <c:when test="${list.size()==null }">
+                               <c:when test="${product.size()==null}">
                                 <div class="item active">
                                     <img class="slide-image" src="http://placehold.it/800x300" alt="">
                                 </div>
+                              
                             	</c:when> 
                             	<c:otherwise>
                                 <div class="item active">
-                                    <img class="slide-image" src="/img/${random.get(0).getPic()}" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[0].pic }" style="width: 800px; height: 300px;">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/img/${random.get(1).getPic()}" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[1].pic }" style="width: 800px; height: 300px;">
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/img/${random.get(2).getPic()}" style="width: 800px; height: 300px;">
+                                    <img class="slide-image" src="/resources/img/${random[2].pic }" style="width: 800px; height: 300px;">
+                               
                                 </div>
                            		</c:otherwise>
                                 </c:choose>
@@ -126,7 +109,7 @@
                 </div>
                 <div class="row">
                     <c:choose>
-                        <c:when test="${list.size()==0 }">
+                        <c:when test="${product.size()==0 }">
                     	 <div class="col-sm-4 col-lg-4 col-md-4">
                          <div class="thumbnail">
                              <img src="http://placehold.it/320x150" alt="">
@@ -148,19 +131,19 @@
                              </div>
                          </div>
                      </div>
-                   
+                    </c:when>
 					<c:otherwise>
-						<c:forEach items="${list}" var="product">
+						<c:forEach items="${product}" var="product">
 					 <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
-                        <a href="/getProduct.do?prodNo=${product.getProdNo}">
-                            <img src="/img/${product.getPic }" alt="" style="width: 320px; height: 200px;">
+                        <a href="/product/getProduct/${product.prodNo }">
+                            <img src="/resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;">
                               <div class="caption">
-                                <h4 class="pull-right">${product.getPrice } 원</h4>
-                                <h4 title="${product.getTitle }" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                			${product.getTitle }
+                                <h4 class="pull-right">${product.price } 원</h4>
+                                <h4 title="${product.prodName }" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                			${product.prodName }
                                 </h4>
-                                <p>${product.getInfo}</p>
+                                <p>${product.info}</p>
                             </div>
                             <div class="ratings">
                                 <p class="pull-right"></p>
@@ -170,6 +153,7 @@
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star-empty"></span>
+                                 
                                 </p>
                             </div>
                             </a>
@@ -177,7 +161,6 @@
                     </div>
                     </c:forEach>
                     </c:otherwise>
-			</c:when>
 			</c:choose>
                         </div>
                     </div>
