@@ -12,10 +12,9 @@
 		<result property="data"			column="BUY_DATE" 			jdbcType="DATE" />
 	</resultMap>
 	
-	<!-- SQL : INSERT -->
 	<insert		id="buyProduct"	parameterType="Buy" >
 	 	INSERT
-		INTO Product
+		INTO
 		VALUES	 (	seq_Product_prod_no.nextval,
 				    #{memberNo} , #{prodName} , #{price}, #{info}, #{pic},
 				    SYSDATE, 0, #{cate}
@@ -29,18 +28,18 @@
 		</where>
 	</update>
 	
-	<select id="getProduct" parameterType="int" resultMap="ProductResultMap">
+	<select id="getProduct" parameterType="int" resultMap="BuyResultMap">
 		SELECT *FROM PRODUCT WHERE PROD_NO=#{value}
 	</select>
 	 
-	<select id="getProductList" parameterType="int" resultMap="ProductResultMap">
+	<select id="getProductList" parameterType="int" resultMap="BuyResultMap">
 		select *from Product
 		<where>
 			member_no=#{value}
 		</where>
 	</select>
 	
-	<select id="getAllProductList" resultMap="ProductResultMap">
+	<select id="getAllProductList" resultMap="BuyResultMap">
 		select *from Product
 	</select>
 	

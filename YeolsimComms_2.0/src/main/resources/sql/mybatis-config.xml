@@ -16,13 +16,16 @@
 	<typeAliases>
 		<typeAlias alias="member" type="yeolsim.service.domain.Member" />
 		<typeAlias alias="product" type="yeolsim.service.domain.Product" />
-		
+		<typeAlias alias="buket" type="yeolsim.service.domain.Buket" />
+		<typeAlias alias="buy" type="yeolsim.service.domain.Buy" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
 	<mappers>
 		<mapper resource="sql/MemberMapper.xml"/>
 		<mapper resource="sql/ProductMapper.xml"/>
+		<mapper resource="sql/BuketMapper.xml"/>
+		<mapper resource="sql/BuyMapper.xml"/>
 	</mappers>
 
 </configuration>

@@ -26,8 +26,21 @@
 		window.onload = function(){
 			$("#buket").click(function(){
 				alert("장바구니에 추가 되었습니다.")
-				document.getElementById("info").action="/addBuket.do";
+				$.ajax({
+					type:"POST",
+					url:"/buket/insertBuket",
+					dataType:"JSON",
+					contentType: "application/json",
+					data:JSON.stringify({
+						memberNo:$("#memberNo").val(),
+						prodNo:$("#prodNo").val(),
+						count:$("#count").val()
+					}),
+					success:function(data){
+							console.log(data.check)
+					}
 				})
+			})
 			
 			$("#buy").click(function(){
 			alert("구매")
@@ -76,7 +89,7 @@
         <c:choose>
 	        <c:when test="${member!=null }">
 	        <div id="navbar" class="navbar-collapse collapse">
-	          <form class="navbar-form navbar-right" action="/logout.do" method="post">
+	          <form class="navbar-form navbar-right" action="/member/logout" method="GET">
 	            <div class="form-group">
 	              <span  style="color: wheat;">${member.id }(${member.name})님 환영 합니다.</span>
 	            </div>
@@ -127,9 +140,10 @@
                         	<p class="pull-right" style="width:250px;">
 								<span class="glyphicon glyphicon-chevron-left" id="sub" style="border: solid 2px;padding:2%;margin:3px;"></span>
 								<input type="text" value="1" readonly="" name="count" id="count" style="width: 10%;">
-								<input type="hidden" value="${product.prodNo }" name="prodNo" id="count" style="width: 10%;">
+								<input type="hidden" value="${product.prodNo }" name="prodNo" id="prodNo" style="width: 10%;">
+								<input type="hidden" value="${member.memberNo }" name="memberNo" id="memberNo" style="width: 10%;">
 								<span class="glyphicon glyphicon-chevron-right" id="add" style="border:solid 2px;padding:2%;margin:3px;"></span>
-                        	<button id="buket" type="submit" class="btn btn-success" >장바구니</button>
+                        	<button id="buket" type="button" class="btn btn-success" >장바구니</button>
                         	<button id="buy" type="submit" class="btn btn-success" >구 매 </button>
                         	</p>
 						</form>
