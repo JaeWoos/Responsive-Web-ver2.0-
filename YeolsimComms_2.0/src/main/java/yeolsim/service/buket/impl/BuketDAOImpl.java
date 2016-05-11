@@ -31,12 +31,13 @@ public class BuketDAOImpl implements BuketDAO {
 	@Override
 	public Buket findBuket(int totalBuy) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("BuketMapper.getBuket", totalBuy);
 	}
 
 	@Override
 	public List<Buket> addBuketList(int memberNo) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("2");
 		return sqlSession.selectList("BuketMapper.getBuketList", memberNo);
 	}
 
@@ -44,5 +45,11 @@ public class BuketDAOImpl implements BuketDAO {
 	public void updateBuket(int totalBuy) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void deleteBuket(int totalBuy) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.delete("BuketMapper.deleteBuket", totalBuy);
 	}
 }

@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import yeolsim.service.buket.BuketService;
+import yeolsim.service.domain.Buket;
 import yeolsim.service.domain.Member;
 import yeolsim.service.domain.Product;
 import yeolsim.service.member.MemberService;
@@ -30,6 +32,10 @@ public class testController {
 	@Autowired
 	@Qualifier("ProductServiceImpl")
 	private ProductService productService;
+	
+	@Autowired
+	@Qualifier("BuketServiceImpl")
+	private BuketService buketService;
 
 	//@Test
 	public void insertMember() throws Exception{
@@ -53,7 +59,7 @@ public class testController {
 		System.out.println(list);
 	}
 	
-	@Test
+	//@Test
 	public void getProduct() throws Exception{
 
 		System.out.println("junit 시작");
@@ -62,7 +68,19 @@ public class testController {
 		System.out.println(map);
 	}
 	
-	
+	@Test
+	public void getListBuket()throws Exception{
+		
+		List<Buket> buketList=buketService.addBuketList(1000040);
+		System.out.println("test :"+buketList);
+		System.out.println(buketList.get(0).getBuketProd());
+		
+		List<Product> prodList =new ArrayList<Product>();
+		for(int i=0; i<buketList.size(); i++){
+			prodList.add(i, buketList.get(i).getBuketProd());
+		}
+		System.out.println("test2: "+prodList);
+	}
 }	
 
 

@@ -9,7 +9,6 @@ public class Buy {
 	private int buyNo;
 	private int memberNo;
 	private int prodNo;
-	private int totalBuy;
 	private int tranNo;
 	private Date data;
 
@@ -42,14 +41,6 @@ public class Buy {
 		this.prodNo = prodNo;
 	}
 	
-	public int getTotalBuy() {
-		return totalBuy;
-	}
-
-	public void setTotalBuy(int totalBuy) {
-		this.totalBuy = totalBuy;
-	}
-
 	public int getTranNo() {
 		return tranNo;
 	}
@@ -68,7 +59,7 @@ public class Buy {
 
 	@Override
 	public String toString() {
-		return "Buy [buyNo=" + buyNo + ", memberNo=" + memberNo + ", totalBuy=" + totalBuy + ", tranNo=" + tranNo
+		return "Buy [buyNo=" + buyNo + ", memberNo=" + memberNo + ", prodNo=" + prodNo + ", tranNo=" + tranNo
 				+ ", data=" + data + "]";
 	}
 }

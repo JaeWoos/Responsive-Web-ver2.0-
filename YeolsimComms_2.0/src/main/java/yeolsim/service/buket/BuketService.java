@@ -15,4 +15,7 @@ public interface BuketService {
 	
 	//update
 	public void updateBuket(int totalBuy) throws Exception;
+	
+	//delete
+	public void deleteBuekt(int totalBuy) throws Exception;
 }

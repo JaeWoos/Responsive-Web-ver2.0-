@@ -32,12 +32,13 @@ public class BuketServiceImpl implements BuketService {
 	@Override
 	public Buket findBuket1(int totalBuy) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return buketDAO.findBuket(totalBuy);
 	}
 
 	@Override
 	public List<Buket> addBuketList(int memberNo) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println("1");
 		return buketDAO.addBuketList(memberNo);
 	}
 
@@ -45,6 +46,12 @@ public class BuketServiceImpl implements BuketService {
 	public void updateBuket(int totalBuy) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void deleteBuekt(int totalBuy) throws Exception {
+		// TODO Auto-generated method stub
+		buketDAO.deleteBuket(totalBuy);
 	}
 
 }

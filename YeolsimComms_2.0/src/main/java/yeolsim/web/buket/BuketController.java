@@ -1,5 +1,6 @@
 package yeolsim.web.buket;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import yeolsim.service.buket.BuketService;
 import yeolsim.service.domain.Buket;
+import yeolsim.service.domain.Product;
 import yeolsim.service.product.ProductService;
 
 @Controller
@@ -53,7 +55,7 @@ public class BuketController {
 		System.out.println(buketList);
 		
 		model.addAttribute("buketList", buketList);
-		
+
 		return "forward:/buket/buketList.jsp"; 
 	}
 

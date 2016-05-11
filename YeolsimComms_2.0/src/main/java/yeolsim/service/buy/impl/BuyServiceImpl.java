@@ -15,7 +15,7 @@ public class BuyServiceImpl implements BuyService {
 	
 	@Autowired
 	@Qualifier("BuyDAOImpl")
-	private BuyDAO buyDAO=new BuyDAOImpl();
+	private BuyDAO buyDAO;
 	
 	
 	public static void main(String[] args) {
@@ -26,7 +26,8 @@ public class BuyServiceImpl implements BuyService {
 	@Override
 	public void insertBuy(Buy buy) throws Exception {
 		// TODO Auto-generated method stub
-
+		System.out.println("1");
+		buyDAO.insertBuy(buy);
 	}
 
 	@Override

@@ -10,10 +10,18 @@ public class Buket {
 	private int memberNo;
 	private int prodNo;
 	private int count;
-	
+	private Product buketProd;
 	
 	///Constructor
 	public Buket(){
+	}
+	
+	public Product getBuketProd() {
+		return buketProd;
+	}
+
+	public void setBuketProd(Product buketProd) {
+		this.buketProd = buketProd;
 	}
 
 	public int getTotalBuy() {
@@ -51,8 +59,7 @@ public class Buket {
 	@Override
 	public String toString() {
 		return "Buket [totalBuy=" + totalBuy + ", memberNo=" + memberNo + ", prodNo=" + prodNo + ", count=" + count
-				+ "]";
+				+ ", buketProd=" + buketProd + "]";
 	}
 
-	
 }

@@ -5,13 +5,20 @@
 	<resultMap id="BuketResultMap" type="Buket">
 		<result property="totalBuy" 	column="TOTAL_BUY" 		jdbcType="INTEGER"/>
 		<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
-		<!-- <result property="prodNo"		column="PROD_NO" 		jdbcType="INTEGER" /> -->
+		<result property="prodNo"		column="PROD_NO" 		jdbcType="INTEGER" />
 		<result property="count"		column="COUNT"			jdbcType="INTEGER" />
 		
-		<assioncation property="prodNo" column="PROD_NO" javaType="product">
-			
-		
-		</assioncation>
+		<association property="buketProd" javaType="product">
+			<result property="prodNo"		column="prod_No"		jdbcType="INTEGER" />
+			<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
+			<result property="prodName"		column="PRODNAME" 		jdbcType="VARCHAR" />
+			<result property="price"		column="PRICE" 			jdbcType="INTEGER" />
+			<result property="info"			column="INFO" 			jdbcType="VARCHAR" />
+			<result property="pic"			column="PIC" 			jdbcType="VARCHAR" />
+			<result property="data"			column="DATA" 			jdbcType="DATE" />
+			<result property="stat"			column="STAT" 			jdbcType="INTEGER" />
+			<result property="cate"			column="CATE" 			jdbcType="VARCHAR" />
+		</association>
 	</resultMap>
 	
 	<insert		id="insertBuket"	parameterType="buket" >
@@ -44,6 +51,10 @@
 			total_buy=#{value}
 		</where>
 	</update>
+	
+	<delete id="deleteBuket" parameterType="int">
+		DELETE from temp where total_buy=#{value}
+	</delete>
 	
 </mapper>
 

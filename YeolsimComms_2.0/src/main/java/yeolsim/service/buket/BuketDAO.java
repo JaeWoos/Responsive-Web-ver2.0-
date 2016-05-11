@@ -16,5 +16,7 @@ public interface BuketDAO {
 	//update
 	public void updateBuket(int totalBuy)throws Exception;
 	
+	//delete
+	public void deleteBuket(int totalBuy)throws Exception;
 	
 }

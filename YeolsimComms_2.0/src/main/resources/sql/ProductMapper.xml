@@ -13,6 +13,7 @@
 		<result property="data"			column="DATA" 			jdbcType="DATE" />
 		<result property="stat"			column="STAT" 			jdbcType="INTEGER" />
 		<result property="cate"			column="CATE" 			jdbcType="VARCHAR" />
+		
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
