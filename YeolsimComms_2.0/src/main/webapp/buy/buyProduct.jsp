@@ -24,11 +24,7 @@
     <script type="text/javascript">
     
     window.onload=function(){
-    	$("#pay").click(function(){
-    		alert("gg");
-    		document.getElementById("addBuy").action="/getBuy.do"
-    		
-    	})
+
     }
     </script>
 </head>
@@ -66,21 +62,25 @@
             </div>
         </div>
         <!-- Project One -->
+        <c:set var="totalPrice" value="0" />
+        <c:forEach items="${prodList }" var="product">
+        <c:set var="totalPrice" value="${totalPrice+product.price }"/>
         <div class="row">
             <div class="col-md-7">
                 <a href="#">
-                    <img class="img-responsive" src="/img/" alt="" style="width: 320px; height: 200px;">
+                    <img class="img-responsive" src="../../resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;">
                 </a>
             </div>
             <div class="col-md-5">
-<%--                 <h3><%=product.getProdName() %></h3>
-                <h4>가격 : <%=product.getPrice() %></h4>
-                <p><%=product.getInfo() %></p> --%>
+                <h3>${product.prodName } </h3>
+                <h4>가격 : ${product.price }</h4>
+                <p>${product.info }</p>
             </div>
         </div>
-        <hr>
+        <br><hr><br>
+        </c:forEach>
         <!-- /.row -->
-		<form class="form-horizontal" role="form" method="post" id="addBuy">                  
+		<form class="form-horizontal" action="/buy/insertProduct" method="post" id="addBuy">                  
             <div class="form-group" id="divName">
                 <label for="inputName" class="col-lg-2 control-label">받으실 분</label>
                 <div class="col-lg-10">
@@ -102,10 +102,11 @@
             <div class="form-group" id="divPrice">
                 <label for="inputPrice" class="col-lg-2 control-label">총 결제금액</label>
                 <div class="col-lg-10">
-<%--                     <div><h3 style="margin: 3px;" ><%=product.getPrice() %>원</h3></div>
-                    <input type="hidden" name="price" value="<%=product.getPrice() %>">
-                    <input type="hidden" name="totalBuy" value="<%=buket.getTotalBuy() %>">
-                    <input type="hidden" name="prodNo" value="<%=product.getProdNo() %>"> --%>
+                    <div><h3 style="margin: 3px;" > <c:out value="${totalPrice }"/>원</h3></div>
+                    <c:forEach items="${prodList}" var="prod">
+					   <input type="hidden" name="prodNo" value="${prod.prodNo }">
+					</c:forEach>                 
+					   <input type="hidden" name="totalBuy" value="${totalBuy}">
                 </div>
             </div>
             <div class="form-group" id="divPrice">
@@ -113,16 +114,16 @@
              <div class="col-lg-10">
 	            <div class="btn-group" data-toggle="buttons">
 	                <label class="btn btn-default">
-	                    <input type="radio" name="pay" value="1" /> 신용카드
+	                    <input type="radio" name="pay" value="신용카드" /> 신용카드
 	                </label> 
 	                <label class="btn btn-default">
-	                    <input type="radio" name="pay" value="2" /> 계좌이체
+	                    <input type="radio" name="pay" value="계좌이체" /> 계좌이체
 	                </label> 
 	                <label class="btn btn-default">
-	                    <input type="radio" name="pay" value="3" /> 기타
+	                    <input type="radio" name="pay" value="기타" /> 기타
 	                </label> 
 	                <label class="btn btn-default">
-	                    <input type="radio" name="pay" value="4" /> 외상
+	                    <input type="radio" name="pay" value="외상" /> 외상
 	                </label> 
 	            </div>
 	            </div>
@@ -133,10 +134,8 @@
                 </div>
             </div>
         </form>
-
         <hr>
     <!-- /.container -->
-
     <div class="container">
         <hr>
         <!-- Footer -->
@@ -147,10 +146,7 @@
                 </div>
             </div>
         </footer>
-
     </div>
     <!-- /.container -->
-
 </body>
-
 </html>

@@ -56,7 +56,7 @@
 				<h1 class="page-header">장바구니 리스트</h1>
 			</div>
 		</div>
-		<form  action="/buy/insertProduct" method="POST">
+		<form  action="/buy/viewProduct" method="POST">
 		<c:forEach items="${buketList}" var="buket">
 			<div class="row">
 				<div>

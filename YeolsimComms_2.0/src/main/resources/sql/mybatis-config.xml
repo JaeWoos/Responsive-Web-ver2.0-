@@ -18,6 +18,8 @@
 		<typeAlias alias="product" type="yeolsim.service.domain.Product" />
 		<typeAlias alias="buket" type="yeolsim.service.domain.Buket" />
 		<typeAlias alias="buy" type="yeolsim.service.domain.Buy" />
+		<typeAlias alias="buyMember" type="yeolsim.service.domain.BuyMember" />
+		<typeAlias alias="pay" type="yeolsim.service.domain.Pay" />
 	</typeAliases>
 	
 	 <!-- SQL Definition :: file include -->
@@ -26,6 +28,8 @@
 		<mapper resource="sql/ProductMapper.xml"/>
 		<mapper resource="sql/BuketMapper.xml"/>
 		<mapper resource="sql/BuyMapper.xml"/>
+		<mapper resource="sql/BuyMemberMapper.xml"/>
+		<mapper resource="sql/PayMapper.xml"/>
 	</mappers>
 
 </configuration>

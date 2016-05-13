@@ -8,7 +8,7 @@ public interface BuyService {
 
 	
 	//insert
-	public void insertBuy(Buy buy) throws Exception;
+	public int insertBuy(Buy buy) throws Exception;
 	
 	//delete
 	public void delBuy(int tranNo) throws Exception;

@@ -10,7 +10,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import yeolsim.service.buket.BuketService;
+import yeolsim.service.buy.BuyService;
+import yeolsim.service.buyMember.BuyMemberService;
 import yeolsim.service.domain.Buket;
+import yeolsim.service.domain.Buy;
 import yeolsim.service.domain.Member;
 import yeolsim.service.domain.Product;
 import yeolsim.service.member.MemberService;
@@ -36,6 +39,14 @@ public class testController {
 	@Autowired
 	@Qualifier("BuketServiceImpl")
 	private BuketService buketService;
+	
+	@Autowired
+	@Qualifier("BuyServiceImpl")
+	private BuyService buyService;
+	
+	@Autowired
+	@Qualifier("buyMemberServiceImpl")
+	private BuyMemberService buyMemberService;
 
 	//@Test
 	public void insertMember() throws Exception{
@@ -68,7 +79,7 @@ public class testController {
 		System.out.println(map);
 	}
 	
-	@Test
+	//@Test
 	public void getListBuket()throws Exception{
 		
 		List<Buket> buketList=buketService.addBuketList(1000040);
@@ -80,6 +91,17 @@ public class testController {
 			prodList.add(i, buketList.get(i).getBuketProd());
 		}
 		System.out.println("test2: "+prodList);
+	}
+	
+	@Test
+	public void buyProduct()throws Exception{
+
+		Buy buy=new Buy();
+		buy.setMemberNo(1000040);
+		buy.setTranNo(1);
+		buy.setProdNo(1000057);
+		
+		System.out.println("gg"+buyService.insertBuy(buy));
 	}
 }	
 

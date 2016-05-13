@@ -15,8 +15,12 @@
 	 	INSERT
 		INTO buy
 		VALUES	 (	seq_BUY_buy_no.nextval,
-				    #{buyNo} , #{prodNo} , #{memberNo}, #{tranNo}, SYSDATE
+				    #{memberNo}, SYSDATE, #{tranNo} , #{prodNo} 
 				   )
+			<selectKey keyProperty="buyNo" resultType="Integer" order="AFTER">
+				SELECT seq_BUY_buy_no.currval FROM dual
+			</selectKey>				   
+				   
 	</insert>
 	
 

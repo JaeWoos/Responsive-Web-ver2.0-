@@ -26,10 +26,11 @@ public class BuyDAOImpl implements BuyDAO {
 	}
 
 	@Override
-	public void insertBuy(Buy buy) throws Exception {
+	public int insertBuy(Buy buy) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("2");
 		sqlSession.insert("BuyMapper.insertBuy", buy);
+		return buy.getBuyNo();
 	}
 
 	@Override

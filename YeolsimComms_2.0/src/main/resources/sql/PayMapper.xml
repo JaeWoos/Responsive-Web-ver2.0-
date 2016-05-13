@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd.mybatis-3-config.dtd">
+
+<mapper namespace="PayMapper">
+
+	<resultMap id="PayResultMap" type="Pay">
+		<result property="payNo" 		column="PAY_NO" 		jdbcType="INTEGER"/>
+		<result property="buyNo"		column="BUY_NO" 		jdbcType="INTEGER" />
+		<result property="payMenu"		column="PAY_MENU"		jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert		id="insertPay"	parameterType="pay" >
+	 	INSERT
+		INTO pay
+		VALUES	 (	seq_Pay_Pay_no.nextval,
+				    #{buyNo} , #{payMenu}  )
+	</insert>
+	
+	<delete id="deletePay" parameterType="int">
+		DELETE
+			FROM PAY where pay_no=#{value}
+	</delete>
+	
+</mapper>
+
+
+
+

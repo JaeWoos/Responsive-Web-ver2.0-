@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd.mybatis-3-config.dtd">
+
+<mapper namespace="BuyMemberMapper">
+	<resultMap id="BuyMemberResultMap" type="BuyMember">
+		<result property="buyNo" 	column="BUY_NO" 		jdbcType="INTEGER"/>
+		<result property="name"		column="NAME"			jdbcType="VARCHAR" />
+		<result property="phone"	column="PHONE" 			jdbcType="VARCHAR" />
+		<result property="addr"		column="ADDR"			jdbcType="VARCHAR" />
+
+	</resultMap>
+	
+	<insert		id="insertBuyMember"	parameterType="buyMember" >
+	 	INSERT
+		INTO BUYMEMBER
+		VALUES	 (${buyNo},
+				    #{name}, #{phone}, #{addr})
+	</insert>
+	
+	<select id="getBuyMember" parameterType="int" resultMap="BuyMemberResultMap">
+		SELECT *FROM BUYMEMBER
+			<where>
+			 	buy_no=#{value}
+			</where>
+	</select>
+	
+	<update id="updateBuyMember" parameterType="int">
+		UPDATE BUYMEMBER
+		SET name=#{name}, phone=#{phone}, addr=#{addr}
+		<where>
+			buy_no=#{value}
+		</where>
+	</update>
+	
+	<delete id="deleteBuyMember" parameterType="int">
+		DELETE from BUYMEMBER where buy_no=#{value}
+	</delete>
+	
+</mapper>
+
+
+
+

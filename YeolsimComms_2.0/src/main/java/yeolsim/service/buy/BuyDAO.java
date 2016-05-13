@@ -9,7 +9,7 @@ import yeolsim.service.domain.Product;
 public interface BuyDAO {
 
 	//insert
-	public void insertBuy(Buy buy)throws Exception;
+	public int insertBuy(Buy buy)throws Exception;
 	
 	//select
 	public Buy getdBuy(int totalBuy)throws Exception;

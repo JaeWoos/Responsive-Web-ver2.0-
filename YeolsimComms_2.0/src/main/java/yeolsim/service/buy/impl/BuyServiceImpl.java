@@ -24,10 +24,10 @@ public class BuyServiceImpl implements BuyService {
 	}
 
 	@Override
-	public void insertBuy(Buy buy) throws Exception {
+	public int insertBuy(Buy buy) throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("1");
-		buyDAO.insertBuy(buy);
+		return buyDAO.insertBuy(buy);
 	}
 
 	@Override
