@@ -31,20 +31,24 @@
 					url:"/buket/insertBuket",
 					dataType:"JSON",
 					contentType: "application/json",
-					data:JSON.stringify({
+					data:{
 						memberNo:$("#memberNo").val(),
 						prodNo:$("#prodNo").val(),
 						count:$("#count").val()
-					}),
+					},
 					success:function(data){
 							console.log(data.check)
 					}
 				})
 			})
 			
-			$("#buy").click(function(){
-			alert("구매")
-			document.getElementById("info").action="/addBuy.do?prodNo";
+			$("#back").click(function(){
+			 history.go(-1);
+			})
+						
+			$("#non").click(function(){
+			alert("로그인을 해주세요")
+			document.getElementById("id").focus();
 			})
 		}
 			
@@ -67,17 +71,15 @@
 				}
 	        })
 	    })
-	        
-	 
 	</script> 
 </head>
 <body>
-<%
-		request.setCharacterEncoding("UTF-8");
-%>
+
    <nav class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
-        <div class="navbar-header">
+        <c:choose>
+	        <c:when test="${member!=null }">
+	    <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -86,8 +88,6 @@
           </button>
           <a class="navbar-brand" href="/member/login">Yeolsim Shop</a>
         </div>
-        <c:choose>
-	        <c:when test="${member!=null }">
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <form class="navbar-form navbar-right" action="/member/logout" method="GET">
 	            <div class="form-group">
@@ -100,10 +100,19 @@
 	      </div>
 	      </c:when>
 	      <c:otherwise>
+		     <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="/product/start">Yeolsim Shop</a>
+	        </div>
 	       <div id="navbar" class="navbar-collapse collapse">
 		          <form class="navbar-form navbar-right" id="loginform" action="/member/login" method="post">
 		            <div class="form-group">
-		              <input type="text" placeholder="ID" name="Id" class="form-control">
+		              <input type="text" placeholder="ID" id="id" name="Id" class="form-control">
 		            </div>
 		            <div class="form-group">
 		              <input type="password" placeholder="Password" name="password" class="form-control">
@@ -132,11 +141,12 @@
                     <div class="ratings" style="margin-bottom: 25px;">
                     <c:choose>
                     <c:when test="${member==null }">
-                    	<button id="buket" type="submit" class="btn btn-success" >장바구니</button>
+                    	<button id="back" type="button" class="pull-right btn btn-success" >확 인</button>
+                        <button id="non" type="button" class="pull-right btn btn-success" style="margin-right: 2%;">구 매</button>
 					
 					</c:when>
                     <c:when test="${product.memberNo!=member.memberNo }">
-                        <form class="counter" id="info">
+                        <form class="counter" id="info" method="POST">
                         	<p class="pull-right" style="width:250px;">
 								<span class="glyphicon glyphicon-chevron-left" id="sub" style="border: solid 2px;padding:2%;margin:3px;"></span>
 								<input type="text" value="1" readonly="" name="count" id="count" style="width: 10%;">

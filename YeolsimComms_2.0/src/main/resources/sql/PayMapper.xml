@@ -21,6 +21,11 @@
 			FROM PAY where pay_no=#{value}
 	</delete>
 	
+	<select id="selectPay" parameterType="int" resultMap="PayResultMap">
+		SELECT *FROM Pay
+		WHERE BUY_NO=#{value}
+	</select>
+	
 </mapper>
 
 

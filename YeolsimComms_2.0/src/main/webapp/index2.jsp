@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ page import="java.util.*"  %>
-<%@ page import="yeolsim.service.domain.Member" %>
-<%@ page import="yeolsim.service.domain.Product" %>
-<%@ page import="yeolsim.service.product.ProductService" %>
-<%@ page import="yeolsim.service.product.ProductDAO" %>
-<%@ page import="yeolsim.service.product.impl.ProductServiceImpl" %>
-<%@ page import="yeolsim.service.product.impl.ProductDAOImpl" %>
-
   
 <!DOCTYPE html>
 <html>
@@ -34,9 +26,6 @@
     
 </head>
 <body>
-  	<%
-		request.setCharacterEncoding("UTF-8");
-	%>
    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -63,7 +52,6 @@
       </div>
     </nav>
 
-
     <!-- Page Content -->
     <div class="container">
 		<div class="row" >
@@ -82,7 +70,6 @@
                                 <div class="item active">
                                     <img class="slide-image" src="http://placehold.it/800x300" alt="">
                                 </div>
-                              
                             	</c:when> 
                             	<c:otherwise>
                                 <div class="item active">
@@ -93,7 +80,6 @@
                                 </div>
                                 <div class="item">
                                     <img class="slide-image" src="/resources/img/${random[2].pic }" style="width: 800px; height: 300px;">
-                               
                                 </div>
                            		</c:otherwise>
                                 </c:choose>
@@ -133,7 +119,9 @@
                      </div>
                     </c:when>
 					<c:otherwise>
-						<c:forEach items="${product}" var="product">
+						<c:forEach var="product" items="${product }">
+					 <c:forEach var="men" items="${allMember }">
+					 <c:if test="${product.memberNo==men.memberNo}">
 					 <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                         <a href="/product/getProduct/${product.prodNo }">
@@ -143,23 +131,24 @@
                                 <h4 title="${product.prodName }" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 			${product.prodName }
                                 </h4>
-                                <p>${product.info}</p>
+                                <p>${product.info }</p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right"></p>
+                                <p class="pull-right">${men.id }(${men.name })</p>
                                 <p>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star"></span>
                                     <span class="glyphicon glyphicon-star-empty"></span>
-                                 
                                 </p>
                             </div>
                             </a>
                         </div>
                     </div>
+                    </c:if>
                     </c:forEach>
+					</c:forEach>
                     </c:otherwise>
 			</c:choose>
                         </div>

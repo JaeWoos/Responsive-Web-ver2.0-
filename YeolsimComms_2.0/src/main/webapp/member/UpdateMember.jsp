@@ -191,10 +191,10 @@
 			<div class="col-md-3">
 				<p class="lead">개인 관리</p>
 				<div class="list-group">
-					<a href="/member/updateMember" class="list-group-item"  style="background-color: #DCDCDC">개인정보 수정</a>
-					<a href="" class="list-group-item">상품 등록</a>
-					<a href="" class="list-group-item"  >장바 구니</a>
-                    <a href="" class="list-group-item"  >구매 목록</a>
+                    <a href="/member/updateMember" class="list-group-item" style="background-color: #DCDCDC">개인정보 수정</a>
+                    <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
+                    <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
+                    <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
 				</div>
 			</div>
 			<div class="col-md-9" style="margin-top: 3%;">

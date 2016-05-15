@@ -9,6 +9,20 @@
 		<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
 		<result property="tranNo"		column="TRAN_NO" 			jdbcType="INTEGER" />
 		<result property="data"			column="BUY_DATE" 			jdbcType="DATE" />
+		
+		<association property="buyProd" javaType="product">
+			<result property="prodNo"		column="prod_No"		jdbcType="INTEGER" />
+			<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
+			<result property="prodName"		column="PRODNAME" 		jdbcType="VARCHAR" />
+			<result property="price"		column="PRICE" 			jdbcType="INTEGER" />
+			<result property="info"			column="INFO" 			jdbcType="VARCHAR" />
+			<result property="pic"			column="PIC" 			jdbcType="VARCHAR" />
+			<result property="data"			column="DATA" 			jdbcType="DATE" />
+			<result property="stat"			column="STAT" 			jdbcType="INTEGER" />
+			<result property="cate"			column="CATE" 			jdbcType="VARCHAR" />
+		</association>
+		
+		
 	</resultMap>
 	
 	<insert		id="insertBuy"	parameterType="Buy" >
@@ -23,7 +37,17 @@
 				   
 	</insert>
 	
-
+	<select id="selectBuy" parameterType="int" resultMap="BuyResultMap">
+		SELECT *FROM BUY B, PRODUCT P
+			WHERE B.PROD_NO=P.PROD_NO
+				AND B.MEMBER_NO=#{value}
+	</select>
+	
+	<select id="getBuy" parameterType="int" resultMap="BuyResultMap">
+		SELECT *FROM BUY b, product p
+			WHERE b.prod_no=p.prod_no
+			and BUY_NO=#{value}
+	</select>
 	
 </mapper>
 

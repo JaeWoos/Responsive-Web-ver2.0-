@@ -62,6 +62,9 @@
             </div>
         </div>
         <!-- Project One -->
+        <c:set var="totalPrice" value="0" />
+        <c:forEach items="${prodList }" var="product">
+        <c:set var="totalPrice" value="${totalPrice+product.price }"/>
         <div class="row">
             <div class="col-md-7">
                 <a href="#">
@@ -74,8 +77,10 @@
                 <p>${product.info }</p>
             </div>
         </div>
+        <br><hr><br>
+        </c:forEach>
         <!-- /.row -->
-		<form class="form-horizontal" action="/buy/insertProduct2" method="post" id="addBuy">                  
+		<form class="form-horizontal" action="/buy/insertProduct" method="post" id="addBuy">                  
             <div class="form-group" id="divName">
                 <label for="inputName" class="col-lg-2 control-label">받으실 분</label>
                 <div class="col-lg-10">
@@ -97,8 +102,13 @@
             <div class="form-group" id="divPrice">
                 <label for="inputPrice" class="col-lg-2 control-label">총 결제금액</label>
                 <div class="col-lg-10">
-                    <div><h3 style="margin: 3px;" > ${product.price }원</h3></div>
-					   <input type="hidden" name="prodNo" value="${product.prodNo }">
+                    <div><h3 style="margin: 3px;" > <c:out value="${totalPrice }"/>원</h3></div>
+                    <c:forEach items="${prodList}" var="prod">
+					   <input type="hidden" name="prodNo" value="${prod.prodNo }">
+					</c:forEach>
+					<c:forEach items="${totalBuy }" var="totalBuy">                 
+					   <input type="hidden" name="totalBuy" value="${totalBuy}">
+					</c:forEach>
                 </div>
             </div>
             <div class="form-group" id="divPrice">

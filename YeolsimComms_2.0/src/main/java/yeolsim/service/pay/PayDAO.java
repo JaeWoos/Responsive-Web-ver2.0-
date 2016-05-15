@@ -9,7 +9,7 @@ public interface PayDAO {
 	
 	public void insertPay(Pay pay)throws Exception;
 	
-	public Map<String, Object> addBuketList(int memberNo)throws Exception;
+	public Pay getPay(int buyNo)throws Exception;
 	
 	
 }

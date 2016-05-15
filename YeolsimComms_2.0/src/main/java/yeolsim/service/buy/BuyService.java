@@ -1,5 +1,6 @@
 package yeolsim.service.buy;
 
+import java.util.List;
 import java.util.Map;
 
 import yeolsim.service.domain.Buy;
@@ -14,9 +15,8 @@ public interface BuyService {
 	public void delBuy(int tranNo) throws Exception;
 	
 	//select
-	public Buy getBuy(int totalBuy) throws Exception;
-	public Map<String,Object> getBuy2(int buyNo) throws Exception;
-	public Map<String,Object> getBuyList(int memberNo) throws Exception;
+	public Buy getBuy(int buyNo) throws Exception;
+	public List<Buy> getBuyList(int memberNo) throws Exception;
 	Map<String, Object> getAllProductList() throws Exception;
 	
 	

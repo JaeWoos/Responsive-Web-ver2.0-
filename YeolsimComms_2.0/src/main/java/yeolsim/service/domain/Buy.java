@@ -11,9 +11,18 @@ public class Buy {
 	private int prodNo;
 	private int tranNo;
 	private Date data;
+	private Product buyProd;
 
 	///Constructor
 	public Buy(){
+	}
+
+	public Product getBuyProd() {
+		return buyProd;
+	}
+
+	public void setBuyProd(Product buyProd) {
+		this.buyProd = buyProd;
 	}
 
 	public int getBuyNo() {
@@ -60,6 +69,8 @@ public class Buy {
 	@Override
 	public String toString() {
 		return "Buy [buyNo=" + buyNo + ", memberNo=" + memberNo + ", prodNo=" + prodNo + ", tranNo=" + tranNo
-				+ ", data=" + data + "]";
+				+ ", data=" + data + ", buyProd=" + buyProd + "]";
 	}
+
+	
 }

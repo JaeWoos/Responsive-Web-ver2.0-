@@ -8,15 +8,10 @@ import yeolsim.service.domain.Member;
 public interface BuyMemberService {
 
 	//insert
-	public void insertMember(BuyMember buyMember) throws Exception;
+	public void insertBuyMember(BuyMember buyMember) throws Exception;
 	
-	public Member loginMember(Member member) throws Exception;
 	
-	public Member getMember(String memberId) throws Exception;
-	
-	public Map<String, Object> getMemberList() throws Exception;
-	
-	public Member updateMember(Member member) throws Exception;
+	public BuyMember getBuyMember(int buyNo) throws Exception;
 	
 	
 }

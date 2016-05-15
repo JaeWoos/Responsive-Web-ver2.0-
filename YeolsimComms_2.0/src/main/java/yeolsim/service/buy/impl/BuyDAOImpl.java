@@ -34,21 +34,15 @@ public class BuyDAOImpl implements BuyDAO {
 	}
 
 	@Override
-	public Buy getdBuy(int totalBuy) throws Exception {
+	public Buy getdBuy(int buyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("BuyMapper.getBuy", buyNo);
 	}
 
 	@Override
-	public Map<String, Object> getBuy2(int buyNo) throws Exception {
+	public List<Buy> getBuyList(int memberNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> getBuyList(int memberNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("BuyMapper.selectBuy", memberNo);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -141,6 +142,20 @@ public class ProductController {
 		model.addAttribute("product", product);
 		
 		return "forward:/product/updateProduct.jsp";
+	}
+	
+	
+	@RequestMapping(value="starCheck", method=RequestMethod.POST)
+	public void starCheck(@RequestBody String temp)throws Exception{
+		System.out.println("/starCheck CON : POST : "+temp);
+		
+		String list[]=temp.split("=");
+		String parseList[]=list[1].split("&");
+		float star=Float.parseFloat(parseList[0]);
+		int prodNo=Integer.parseInt(list[2]);
+		
+		System.out.println("gggg :"+star);
+		System.out.println("gggg : "+prodNo);
 	}
 	
 	

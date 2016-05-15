@@ -8,7 +8,7 @@ public interface PayService {
 
 	public void insertPay(Pay pay) throws Exception;
 	
-	public Map<String,Object> getBuketList(int memberNo) throws Exception;
+	public Pay getPay(int buyNo)throws Exception;
 	
 	
 }

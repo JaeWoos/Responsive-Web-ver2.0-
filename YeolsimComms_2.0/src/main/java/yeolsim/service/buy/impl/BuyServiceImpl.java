@@ -1,5 +1,6 @@
 package yeolsim.service.buy.impl;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,21 +38,15 @@ public class BuyServiceImpl implements BuyService {
 	}
 
 	@Override
-	public Buy getBuy(int totalBuy) throws Exception {
+	public Buy getBuy(int buyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return buyDAO.getdBuy(buyNo);
 	}
 
 	@Override
-	public Map<String, Object> getBuy2(int buyNo) throws Exception {
+	public List<Buy> getBuyList(int memberNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Map<String, Object> getBuyList(int memberNo) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return buyDAO.getBuyList(memberNo);
 	}
 
 	@Override

@@ -12,9 +12,8 @@ public interface BuyDAO {
 	public int insertBuy(Buy buy)throws Exception;
 	
 	//select
-	public Buy getdBuy(int totalBuy)throws Exception;
-	public Map<String, Object> getBuy2(int buyNo)throws Exception;
-	public Map<String, Object> getBuyList(int memberNo)throws Exception;
+	public Buy getdBuy(int buyNo)throws Exception;
+	public List<Buy> getBuyList(int memberNo)throws Exception;
 	public List<Product> getProductList()throws Exception;
 
 	//delete

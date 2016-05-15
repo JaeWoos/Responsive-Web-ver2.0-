@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@page import="org.springframework.ui.Model"%>
-<%@ page import="java.util.List"  %>
-<%@ page import="yeolsim.service.domain.Member" %>
-<%@ page import="yeolsim.service.domain.Product" %>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,9 +27,6 @@
     </script>
 </head>
 <body>
-<%
-		request.setCharacterEncoding("UTF-8");
-%>
    <nav class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
         <div class="navbar-header">
@@ -54,7 +45,6 @@
             </div>
               <button id="login" type="submit" class="btn btn-success" >Sign out</button>
               <a href="/product/myMenu"><button id="addProduct" type="button" class="btn btn-success" >상품관리</button></a>
-		    
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -69,11 +59,38 @@
                     <a href="/member/updateMember" class="list-group-item">개인정보 수정</a>
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
                     <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
-                    <a href="/listBuy.do?userId=" class="list-group-item"  >구매 목록</a>
+                    <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="row">
+                <c:if test="${product.size()==0 }">
+                 <h4 style="text-align: center;">최초 물건을 등록해주세요</h4>
+                	<div class="col-sm-4 col-lg-4 col-md-4">
+                        <div class="thumbnail">	
+                           <a href="#">
+                            <img src="http://placehold.it/320x150" alt="" style="width: 320px; height: 200px;">
+                              <div class="caption">
+                                <h4 class="pull-right"> 원</h4>
+                                <h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                			제품명
+                                </h4>
+                                <p></p>
+                            </div>
+                            <div class="ratings">
+                                <p class="pull-right">${member.id }(${member.name })</p>
+                                <p>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                    <span class="glyphicon glyphicon-star-empty"></span>
+                                </p>
+                            </div>
+                          </a>
+                        </div>
+                    </div>
+                </c:if>
 				<c:forEach var="product" items="${product}">
 					 <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">	

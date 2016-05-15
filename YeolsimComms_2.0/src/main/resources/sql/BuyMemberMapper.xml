@@ -19,9 +19,8 @@
 	
 	<select id="getBuyMember" parameterType="int" resultMap="BuyMemberResultMap">
 		SELECT *FROM BUYMEMBER
-			<where>
+			where
 			 	buy_no=#{value}
-			</where>
 	</select>
 	
 	<update id="updateBuyMember" parameterType="int">

@@ -31,28 +31,17 @@ public class buyMemberDAOImpl implements BuyMemberDAO {
 		sqlSession.insert("BuyMemberMapper.insertBuyMember", buyMember);
 	}
 
-	@Override
-	public Member getMember(String memberId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public Member getdMember(int memberNo) throws Exception {
+	public BuyMember getBuyMember(int buyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("BuyMemberMapper.getBuyMember", buyNo);
 	}
 
 	@Override
 	public List<Member> getUserList() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void updateMember(Member member) throws Exception {
-		// TODO Auto-generated method stub
-
 	}
 
 }

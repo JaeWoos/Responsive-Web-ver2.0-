@@ -30,10 +30,12 @@ public class PayServiceImpl implements PayService {
 	}
 
 	@Override
-	public Map<String, Object> getBuketList(int memberNo) throws Exception {
+	public Pay getPay(int buyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return payDAO.getPay(buyNo);
 	}
+
+	
 
 
 }

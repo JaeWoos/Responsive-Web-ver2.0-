@@ -30,10 +30,13 @@ public class PayDAOImpl implements PayDAO {
 		}
 
 	@Override
-	public Map<String, Object> addBuketList(int memberNo) throws Exception {
+	public Pay getPay(int buyNo) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("PayMapper.selectPay", buyNo);
 	}
+
+	
+
 
 
 }

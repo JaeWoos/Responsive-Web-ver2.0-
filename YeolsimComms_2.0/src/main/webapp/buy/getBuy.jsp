@@ -11,7 +11,8 @@
     <meta name="author" content="">
 
     <title>Yeolsim Commse</title>
-    <!-- Bootstrap Core CSS -->
+
+	 <!-- Bootstrap Core CSS -->
 	<link href="../../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
 	
@@ -20,12 +21,14 @@
     <!-- Custom CSS -->
     <link href="../../resources/bootstrap/css/1-col-portfolio.css" rel="stylesheet">
     
-    <script type="text/javascript">
+	<script type="text/javascript">
+	    window.onload = function(){ 
 
-    </script>
+	    	}
+	</script>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
        <div class="container">
         <div class="navbar-header">
@@ -50,52 +53,54 @@
     </nav>
 
     <!-- Page Content -->
-	<div class="container">
-		<div class="row">
-		 <div class="col-md-3 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 ">
                 <p class="lead">개인 관리</p>
                 <div class="list-group">
                     <a href="/member/updateMember" class="list-group-item">개인정보 수정</a>
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
-                    <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  style="background-color: #DCDCDC">장바 구니</a>
+                    <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
                     <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
                 </div>
-          </div>
-		<form  action="/buy/listViewProduct" class="col-md-9" method="POST">
-				<h4 class="page-header">장바구니 리스트</h4>
-		<c:forEach items="${buketList}" var="buket">
-			<div class="row">
-				<div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="check" value="${buket.totalBuy }">
-						</label>
-					</div>
-				</div>
-			<div class="col-md-7">
-				<a href="#">
-					<img class="img-responsive" src="../../resources/img/${buket.buketProd.pic }" alt="" style="width: 320px; height: 200px;">
-				</a>
-			</div>
-			<div class="col-md-5">
-			 	<div> <h3>${buket.buketProd.prodName }</h3></div>
-				<div> <h4>가격 : ${buket.buketProd.price }</h4></div>
-				<div> <p>${buket.buketProd.info }</p></div>
-				<div> <h4>수량 : ${buket.count}</h4></div> 
-			</div>
-			</div>
-			<hr>
-		</c:forEach>
-		<hr>
-	        <button class="btn btn-primary" type="submit" >결제 하기 <span class="glyphicon glyphicon-chevron-right"></span></button>
-		</form>
-<!-- /.row -->
-	 </div>
-	</div>
-        <hr>
+            </div>
+
+            <div class="col-md-9">
+				 <div class="row">
+				     <div class="col-lg-12">
+				        <h1 class="page-header">주문 내역서</h1>
+				     </div>
+				 </div>
+				        <!-- Project One -->
+				        
+				        <div class="row">
+				            <div class="col-md-7">
+				                <a href="#">
+				                    <img class="img-responsive" src="../../resources/img/${buy.buyProd.pic }" alt="" style="width: 320px; height: 200px;">
+				                </a>
+				            </div>
+				            <div class="col-md-5">
+				            	<h3>구매자 이름 : ${buyMember.name }</h3>
+				            	<h3>구매자 연락처 : ${buyMember.phone }</h3>
+				            	<h3>배송 주소 : ${buyMember.addr}</h3>
+				                <h3>구매 날짜 : ${buy.data }</h3>
+				                <h4>가격 : ${buy.buyProd.price } 원</h4>
+				                <p></p>
+				                <button type="button" id="ok" class="btn btn-success">확 인</button>
+				                <button type="button" id="update" class="btn btn-success">수 정</button>
+				              
+				                
+				            </div>
+				        </div>
+				        <hr>
+				   </div>
+        </div>
+  </div>
+    <!-- /.container -->
     <div class="container">
         <hr>
-    	<footer>
+        <!-- Footer -->
+		<footer>
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Yeolsim Comms 2016</p>
@@ -103,5 +108,6 @@
             </div>
         </footer>
     </div>
+    <!-- /.container -->
 </body>
 </html>

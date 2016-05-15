@@ -16,6 +16,11 @@
 		
 	</resultMap>
 	
+	<sql id="order">
+		order by data desc
+	</sql>
+	
+	
 	<!-- SQL : INSERT -->
 	<insert		id="insertProduct"	parameterType="Product" >
 	 	INSERT
@@ -42,10 +47,12 @@
 		<where>
 			member_no=#{value}
 		</where>
+		<include refid="order"/>
 	</select>
 	
 	<select id="getAllProductList" resultMap="ProductResultMap">
 		select *from Product
+		<include refid="order"/>
 	</select>
 	
 	
