@@ -15,17 +15,45 @@
 	 <!-- Bootstrap Core CSS -->
 	<link href="../../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
 	
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="../../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
+        
     <!-- Custom CSS -->
     <link href="../../resources/bootstrap/css/1-col-portfolio.css" rel="stylesheet">
     
 	<script type="text/javascript">
-	    window.onload = function(){ 
-
-	    	}
+		$(document).on('ready', function(){
+		
+			 $('#star').rating({
+				 displayOnly: true,
+				 step: 0.5
+			 }).on("rating.change", function(event, value, cation){
+				 var star=value
+				 var prodNo=$("#prodNo").val()
+				 console.log("gg"+prodNo)
+				 $.ajax({
+					type:"POST",
+					url:"/product/starCheck",
+					dataType:"json",
+					data:{
+						star:star,
+						prodNo:prodNo,
+					},
+					success:function(data){
+						console.log("Gg")					
+					}
+				 })
+			 })
+		 
+		});
 	</script>
+	<style>
+     .temp .caption{height:25px !important;}
+    </style>
 </head>
 <body>
 
@@ -85,11 +113,12 @@
 				            	<h3>배송 주소 : ${buyMember.addr}</h3>
 				                <h3>구매 날짜 : ${buy.data }</h3>
 				                <h4>가격 : ${buy.buyProd.price } 원</h4>
-				                <p></p>
+				                <div class="temp">
+				                <input id="star" type="text" class="rating rating-loading" value="1" data-size="xs"  data-step="1">
+								<input type="hidden" id="prodNo" value="${buy.prodNo}"/>
+								</div>
 				                <button type="button" id="ok" class="btn btn-success">확 인</button>
 				                <button type="button" id="update" class="btn btn-success">수 정</button>
-				              
-				                
 				            </div>
 				        </div>
 				        <hr>

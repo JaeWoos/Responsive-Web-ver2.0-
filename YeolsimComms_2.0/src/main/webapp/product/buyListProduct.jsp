@@ -21,7 +21,29 @@
     <link href="../../resources/bootstrap/css/1-col-portfolio.css" rel="stylesheet">
     
     <script type="text/javascript">
-
+    
+    window.onload = function(){    
+	    $("#tranNo").click(function(){
+	    	var temp=$(":checked");
+	    	var eachChk=[]
+	    	temp.each(function() {
+	    		eachChk.push($(this).val())
+	    	});
+	    	console.log(eachChk)
+ 			$.ajax({
+				type:"POST",
+				url:"/buy/updateTranNo",
+				dataType:"JSON",
+				data:{
+					eachChk
+				},
+				success:function(){
+					console.log("gg")
+				}
+			}) 
+	    })
+    }
+    
     </script>
 </head>
 <body>
@@ -57,38 +79,42 @@
                 <div class="list-group">
                     <a href="/member/updateMember" class="list-group-item">개인정보 수정</a>
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
-                    <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  style="background-color: #DCDCDC">장바 구니</a>
+                    <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
                     <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
-                     <a href="/product/buyProduct/${member.memberNo }" class="list-group-item"  >판매 관리</a>
+                    <a href="/product/buyProduct/${member.memberNo }" class="list-group-item"  style="background-color: #DCDCDC">판매 관리</a>
                 </div>
           </div>
 		<form  action="/buy/listViewProduct" class="col-md-9" method="POST">
-				<h4 class="page-header">장바구니 리스트</h4>
-		<c:forEach items="${buketList}" var="buket">
+				<h4 class="page-header">판매 리스트</h4>
+		<c:forEach items="${buyList}" var="product">
 			<div class="row">
-				<div>
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" name="check" value="${buket.totalBuy }">
-						</label>
-					</div>
+				<div class="col-md-7">
+						<input type="checkbox" name="check" value="${product.buyProd.buyNo}">
+						<img class="img-responsive" src="../../resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;">
 				</div>
-			<div class="col-md-7">
-				<a href="#">
-					<img class="img-responsive" src="../../resources/img/${buket.buketProd.pic }" alt="" style="width: 320px; height: 200px;">
-				</a>
-			</div>
-			<div class="col-md-5">
-			 	<div> <h3>${buket.buketProd.prodName }</h3></div>
-				<div> <h4>가격 : ${buket.buketProd.price }</h4></div>
-				<div> <p>${buket.buketProd.info }</p></div>
-				<div> <h4>수량 : ${buket.count}</h4></div> 
-			</div>
+				<div class="col-md-5">
+				 	<div> <h3>${product.prodName }</h3></div>
+					<div> <h4>가 격 : ${product.price } 원</h4></div>
+					<div> <h4>설 명 : ${product.info } </h4></div>
+					<div> <h4>판매일 : ${product.buyProd.data}</h4></div> 
+					<c:choose>
+						<c:when test="${product.buyProd.tranNo==0 }">
+							<div> <h4>배송상태 : 배 송 준 비 </h4></div>
+						</c:when>
+						<c:when test="${product.buyProd.tranNo==1 }">
+							<div> <h4>배송상태 : 배 송 중 </h4></div>
+						</c:when>
+						<c:when test="${product.buyProd.tranNo==2 }">
+							<div> <h4>배송상태 : 배 송 완 료 </h4></div>
+						</c:when>
+					</c:choose>
+					
+				</div>
 			</div>
 			<hr>
 		</c:forEach>
 		<hr>
-	        <button class="btn btn-primary" type="submit" >결제 하기 <span class="glyphicon glyphicon-chevron-right"></span></button>
+	        <button class="btn btn-primary" type="button" id="tranNo">배송 처리</button>
 		</form>
 <!-- /.row -->
 	 </div>

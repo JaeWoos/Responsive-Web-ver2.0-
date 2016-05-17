@@ -31,11 +31,11 @@
 					url:"/buket/insertBuket",
 					dataType:"JSON",
 					contentType: "application/json",
-					data:{
+					data:JSON.stringify({
 						memberNo:$("#memberNo").val(),
 						prodNo:$("#prodNo").val(),
 						count:$("#count").val()
-					},
+					}),
 					success:function(data){
 							console.log(data.check)
 					}
@@ -47,9 +47,11 @@
 			})
 						
 			$("#non").click(function(){
-			alert("로그인을 해주세요")
-			document.getElementById("id").focus();
+				alert("로그인을 해주세요")
+				document.getElementById("id").focus();
 			})
+			
+
 		}
 			
 		$(document).ready(function(){ 
@@ -146,7 +148,7 @@
 					
 					</c:when>
                     <c:when test="${product.memberNo!=member.memberNo }">
-                        <form class="counter" id="info" method="POST">
+                        <form class="counter" id="info" method="POST" action="/buy/viewProduct">
                         	<p class="pull-right" style="width:250px;">
 								<span class="glyphicon glyphicon-chevron-left" id="sub" style="border: solid 2px;padding:2%;margin:3px;"></span>
 								<input type="text" value="1" readonly="" name="count" id="count" style="width: 10%;">

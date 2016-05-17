@@ -13,16 +13,23 @@
     <!-- 부트스트랩 -->
    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
 	
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
     
     <script type="text/javascript">
 
-	    window.onload = function(){ 
-
-	    	}
-	</script>    
+	    $(document).on('ready', function(){
+	        $('.star').rating({displayOnly: true, step: 0.5});
+	    });
+	</script>   
+	<style>
+     .rating-xs {font-size:1em; }
+     
+    </style> 
   </head>
   <body>
 
@@ -63,17 +70,21 @@
                                 <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                             </ol>
                             <div class="carousel-inner">
-                               
-                                <div class="item active">
-                                    <img class="slide-image" src="/resources/img/${random[0].pic}" style="width: 800px; height: 300px;">
+                              <div class="item active">
+                                 <a href="/product/getProduct/${random[0].prodNo }">
+                                    <img class="slide-image" src="/resources/img/${random[0].pic }" style="width: 800px; height: 300px;">
+                                 </a>
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/resources/img/${random[1].pic}" style="width: 800px; height: 300px;">
+                                 <a href="/product/getProduct/${random[1].prodNo }">
+                                    <img class="slide-image" src="/resources/img/${random[1].pic }" style="width: 800px; height: 300px;">
+                                 </a>   
                                 </div>
                                 <div class="item">
-                                    <img class="slide-image" src="/resources/img/${random[2].pic}" style="width: 800px; height: 300px;">
+                                 <a href="/product/getProduct/${random[2].prodNo }">
+                                    <img class="slide-image" src="/resources/img/${random[2].pic }" style="width: 800px; height: 300px;">
+                                 </a>   
                                 </div>
-                              
                             </div>
                             <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -103,13 +114,9 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">${men.id }(${men.name })</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                <div class="temp">
+                                    <input class="star" value="${product.stat }" class="rating-loading" data-size="xs">
+                                </div>
                             </div>
                             </a>
                         </div>

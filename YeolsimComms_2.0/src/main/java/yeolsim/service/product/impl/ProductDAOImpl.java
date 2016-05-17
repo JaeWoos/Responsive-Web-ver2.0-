@@ -68,4 +68,22 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 
+	@Override
+	public int starRating(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		int star=sqlSeesion.selectOne("ProductMapper.getStar", product.getProdNo());
+		star+=product.getStat();
+		product.setStat(star);
+		sqlSeesion.update("ProductMapper.starRating", product);
+		return sqlSeesion.selectOne("ProductMapper.getStar", product.getProdNo());
+	}
+
+
+	@Override
+	public List<Product> getBuyProductList(int memberNo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSeesion.selectList("ProductMapper.getBuyProductList", memberNo);
+	}
+
+
 }

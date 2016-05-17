@@ -67,24 +67,40 @@ public class MemberController {
 		Member dbMember=memberService.loginMember(member.getId());
 		Map<String, Object> prodList=productService.getAllProductList();
 		System.out.println(prodList);
-		if(member.getPassword().equals(dbMember.getPassword())){
+		if(dbMember!=null && member.getPassword().equals(dbMember.getPassword())){
 			httpSession.setAttribute("member", dbMember);
+			
+			List<Product> randomList=new ArrayList<Product>();
+			Random ran=new Random();
+			int size=((List<Product>)prodList.get("product")).size();
+			for(int i=0; i<3; i++){
+				int temp=ran.nextInt(size);
+				randomList.add(((List<Product>)prodList.get("product")).get(temp));
+				
+				model.addAttribute("product", prodList.get("product"));
+				model.addAttribute("allMember", prodList.get("member"));
+				model.addAttribute("random", randomList);
+			}
+			return "forward:/loginMain.jsp";
+			
+		}else{
+			List<Product> randomList=new ArrayList<Product>();
+			Random ran=new Random();
+			int size=((List<Product>)prodList.get("product")).size();
+			for(int i=0; i<3; i++){
+				int temp=ran.nextInt(size);
+				randomList.add(((List<Product>)prodList.get("product")).get(temp));
+				
+				model.addAttribute("product", prodList.get("product"));
+				model.addAttribute("allMember", prodList.get("member"));
+				model.addAttribute("random", randomList);
+				model.addAttribute("user", false);
+			}
+			return "forward:/index2.jsp";
+			
 		}
-		
-		List<Product> randomList=new ArrayList<Product>();
-		Random ran=new Random();
-		int size=((List<Product>)prodList.get("product")).size();
-		for(int i=0; i<3; i++){
-			int temp=ran.nextInt(size);
-			randomList.add(((List<Product>)prodList.get("product")).get(temp));
-		}
-		
-		model.addAttribute("product", prodList.get("product"));
-		model.addAttribute("allMember", prodList.get("member"));
-		model.addAttribute("random", randomList);
-		
-		return "forward:/loginMain.jsp";
 	}
+	
 	@RequestMapping(value="login", method=RequestMethod.GET)	
 	public String loginUser(HttpSession httpSession, Model model)throws Exception{
 		

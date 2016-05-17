@@ -13,16 +13,52 @@
 
 	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
 	
 	<script src="../resources/bootstrap/js/jquery.js" ></script>
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
     
     <script type="text/javascript">
-   	
-   		window.onload = function(){ 
-   			
-   		}
+     window.onload=function(){
+    	 var temp=$("#check").val();
+    	 console.log("gg"+temp);
+    	 if(temp=="false"){
+    		 alert("아이디와 비밀번호를 확인하세요.")
+    	 }
+    	 
+ 
+	    $("#login").click(function(event){
+	    	var id=$("#navbar .form-group").find("input[name='Id']").val();
+			var pw=$("#navbar .form-group").find("input[name='password']").val();
+
+			if(id == null || id.length <1) {
+				alert('ID 를 확인하세요.');
+				$("#navbar .form-group").find("input[name='Id']").focus();
+			}else if(pw == null || pw.length <1) {
+				alert('패스워드를 입력하지 않으셨습니다.');
+				$("#navbar .form-group").find("input[name='password']").focus();
+			}else {
+			document.loginform.submit();
+			}
+	 	  })
+     }
+     function keyDown(){
+    	 if(event.keyCode==13){
+    		 document.loginform.submit();
+    	 }
+     }
+	    $(document).on('ready', function(){
+	        $('.star').rating({displayOnly: true, step: 0.5});
+	    });
+	    
+	    
 	</script>    
+	<style>
+     .rating-xs {font-size:1em; }
+     
+    </style> 
     
 </head>
 <body>
@@ -37,15 +73,18 @@
           </button>
           <a class="navbar-brand" href="/index.jsp">Yeolsim Shop</a>
         </div>
+        <c:if test="${user==false }">
+        	<input type="hidden" id="check" value="${user}" >
+        </c:if>
         <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right" id="loginform" action="/member/login" method="post">
+          <form class="navbar-form navbar-right" id="loginform" name="loginform" action="/member/login" method="POST" >
             <div class="form-group">
               <input type="text" placeholder="ID" name="Id" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" placeholder="Password" name="password" class="form-control">
+              <input type="password" placeholder="Password" name="password" class="form-control" onKeyDown="keyDown()">
             </div>
-		      <button id="login" type="submit" class="btn btn-success" >Sign in</button>
+		      <button id="login" type="button" class="btn btn-success" >Sign in</button>
 		       <a href="/member/insertMember"><button id="member" type="button" class="btn btn-success">Sign up</button></a>
           </form>
         </div><!--/.navbar-collapse -->
@@ -73,13 +112,19 @@
                             	</c:when> 
                             	<c:otherwise>
                                 <div class="item active">
+                                 <a href="/product/getProduct/${random[0].prodNo }">
                                     <img class="slide-image" src="/resources/img/${random[0].pic }" style="width: 800px; height: 300px;">
+                                 </a>
                                 </div>
                                 <div class="item">
+                                 <a href="/product/getProduct/${random[1].prodNo }">
                                     <img class="slide-image" src="/resources/img/${random[1].pic }" style="width: 800px; height: 300px;">
+                                 </a>   
                                 </div>
                                 <div class="item">
+                                 <a href="/product/getProduct/${random[2].prodNo }">
                                     <img class="slide-image" src="/resources/img/${random[2].pic }" style="width: 800px; height: 300px;">
+                                 </a>   
                                 </div>
                            		</c:otherwise>
                                 </c:choose>
@@ -135,13 +180,9 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">${men.id }(${men.name })</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                <div class="temp">
+                                    <input class="star" value="${product.stat }" class="rating-loading" data-size="xs">
+                                </div>
                             </div>
                             </a>
                         </div>

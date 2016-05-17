@@ -27,4 +27,11 @@ public interface ProductDAO {
 	public Product getProduct(int probNo)throws Exception;
 	public List<Product> getProductList(int memberNo)throws Exception;		
 	public List<Product> getAllProductList()throws Exception;
+	
+	public int starRating(Product product) throws Exception;
+	public List<Product> getBuyProductList(int memberNo) throws Exception;
 }
+
+
+
+

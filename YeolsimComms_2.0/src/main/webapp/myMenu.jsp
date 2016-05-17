@@ -14,17 +14,27 @@
 
 	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
 	
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
     
     <script>
      $(".list-group").click(function(){
     	 $(this).css('background', darkgray)
     	 
      })
-    
+     $(document).on('ready', function(){
+	        $('.star').rating({displayOnly: true, step: 0.5});
+	    });
     </script>
+    <style>
+     .rating-xs {font-size:1em; }
+     
+    </style> 
+    
 </head>
 <body>
    <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -60,6 +70,7 @@
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
                     <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
                     <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
+                    <a href="/product/buyProduct/${member.memberNo }" class="list-group-item"  >판매 관리</a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -105,13 +116,9 @@
                             </div>
                             <div class="ratings">
                                 <p class="pull-right">${member.id }(${member.name })</p>
-                                <p>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                    <span class="glyphicon glyphicon-star-empty"></span>
-                                </p>
+                                <div class="temp">
+                                    <input class="star" value="${product.stat }" class="rating-loading" data-size="xs">
+                                </div>
                             </div>
                           </a>
                         </div>

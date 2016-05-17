@@ -16,50 +16,23 @@
 	<link href="../../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
+
 	
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="../../resources/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
-    
+     
     <!-- Custom CSS -->
-    <link href="../../resources/bootstrap/css/1-col-portfolio.css" rel="stylesheet">
-    
-    <style>
-     .caption.altS {height:200px !important; }
-     .pull-left.altSs .caption{height:40px !important;}
-    </style>
-    
 </head>
 
 	<script type="text/javascript">
-	
-	$(document).on('ready', function(){
-		
-		 $('#star').rating({
-			 displayOnly: true,
-			 step: 0.5
-		 }).on("rating.change", function(event, value, cation){
-			 var star=value
-			 var prodNo=$("#prodNo").val()
-			 console.log("gg"+prodNo)
-			 $.ajax({
-				type:"POST",
-				url:"/product/starCheck",
-				dataType:"json",
-				data:{
-					star:star,
-					prodNo:prodNo,
-				},
-				success:function(data){
-					console.log("Gg")					
-				}
-				 
-			 })
-		 })
-		 
-	});
-	
+		$(document).on('ready', function(){
+	        $('.star').rating({displayOnly: true, step: 0.5});
+	    });
 	</script>
+	<style>
+     .rating-xs {font-size:1em; }
+    </style> 
 <body>
 
    <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -95,6 +68,7 @@
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
                     <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
                     <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  style="background-color: #DCDCDC">구매 목록</a>
+                	<a href="/product/buyProduct/${member.memberNo }" class="list-group-item" >판매 관리</a>
                 </div>
             </div>
             
@@ -106,18 +80,19 @@
                         <div class="thumbnail">
                          <a href="/buy/getBuyProduct/${buyList.buyNo}">	
                             <img src="../../resources/img/${buyList.buyProd.pic }" alt="" style="width: 320px; height: 200px;">
-                              <div class="caption altS">
+                              <div class="caption">
                                 <h4 class="pull-right ">${buyList.buyProd.price } 원</h4>
                                 <h4 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                                 			${buyList.buyProd.prodName }
                                 </h4>
                                 <p>${buyList.buyProd.info}</p>
-	                                <div class="pull-left altSs">
-										<input id="star" type="text" class="rating rating-loading" value="3" data-size="xs">
-										<input type="hidden" id="prodNo" value="${buyList.buyProd.prodNo}"/>
-									</div>
+	                           </div>
+	                             <div class="ratings">  
 	                                <p class="pull-right">${buyList.data }</p>
-                            </div>
+	                                <p>
+	                                    <input class="star" value="${buyList.buyProd.stat }" class="rating-loading" data-size="xs" >
+	                                </p>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -125,7 +100,6 @@
                 </div>
             </div>
         </div>
-
     </div>
     <!-- /.container -->
     <div class="container">

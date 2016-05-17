@@ -151,20 +151,30 @@ public class ProductController {
 		
 		String list[]=temp.split("=");
 		String parseList[]=list[1].split("&");
-		float star=Float.parseFloat(parseList[0]);
+		int star=Integer.parseInt(parseList[0]);
 		int prodNo=Integer.parseInt(list[2]);
+				
+		Product prod=new Product();
+		prod.setProdNo(prodNo);
+		prod.setStat(star);
 		
-		System.out.println("gggg :"+star);
-		System.out.println("gggg : "+prodNo);
+		int totalStar=productService.starRating(prod);
+		System.out.println("ggg :"+totalStar);
 	}
 	
-	
+	@RequestMapping(value="buyProduct/{memberNo}", method=RequestMethod.GET)
+	public String buyProduct(@PathVariable int memberNo, Model model) throws Exception{
+		System.out.println("/buyProduct CON: GET :"+memberNo);
+		
+		List<Product> prodList=(List<Product>)productService.getBuyProductList(memberNo);
+		
+		System.out.println("Gg"+prodList);
+		model.addAttribute("buyList", prodList);
+		
+		return "forward:/product/buyListProduct.jsp";
+	}
+
 }
-
-
-
-
-
 
 
 

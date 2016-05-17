@@ -13,21 +13,39 @@ public class Product {
 	private String info;
 	private String pic;
 	private Date data;
-	private String stat;
+	private int stat;
 	private String cate;
+	
+	private Buy buyProd;
 
 	///Constructor
 	public Product(){
 	}
 
-	public String getStat() {
+	public Buy getBuyProd() {
+		return buyProd;
+	}
+
+	public void setBuyProd(Buy buyProd) {
+		this.buyProd = buyProd;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public int getStat() {
 		return stat;
 	}
-	
-	public void setStat(String stat) {
+
+	public void setStat(int stat) {
 		this.stat = stat;
 	}
-	
+
 	public String getCate() {
 		return cate;
 	}
@@ -95,7 +113,10 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [prodNo=" + prodNo + ", memberNo=" + memberNo + ", prodName=" + prodName + ", price=" + price
-				+ ", info=" + info + ", pic=" + pic + ", date=" + data + ", stat=" + stat + ", cate=" + cate + "]";
+				+ ", info=" + info + ", pic=" + pic + ", data=" + data + ", stat=" + stat + ", cate=" + cate
+				+ ", buyProd=" + buyProd + "]";
 	}
+
+
 
 }

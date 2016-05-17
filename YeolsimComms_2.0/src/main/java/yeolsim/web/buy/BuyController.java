@@ -168,7 +168,7 @@ public class BuyController {
 		buyMember.setBuyNo(buyNo);
 		buyMemberService.insertBuyMember(buyMember);
 		
-		return null;
+		return "redirect:/buy/getBuyProduct/"+buyNo;
 	}
 	
 	@RequestMapping(value="/getBuyList/{memberNo}", method=RequestMethod.GET)
@@ -187,7 +187,7 @@ public class BuyController {
 	@RequestMapping(value="/getBuyProduct/{buyNo}", method=RequestMethod.GET)
 	public String getBuyProduct(@PathVariable int buyNo, Model model)throws Exception{
 		
-		System.out.println("/getBuyList Con : GET : "+buyNo);
+		System.out.println("/getBuyProduct Con : GET : "+buyNo);
 		
 		Buy buy=(Buy)buyService.getBuy(buyNo);
 		System.out.println("1 : "+buy);
@@ -202,6 +202,15 @@ public class BuyController {
 		
 		
 		return "forward:/buy/getBuy.jsp";
+	}
+	
+	@RequestMapping(value="/updateTranNo", method=RequestMethod.POST)
+	public void updateTranNo(@RequestParam("eachChk[]") List<Object> tranNo, Model model )throws Exception{
+		
+		System.out.println("/updateTranNo : POST :" +tranNo);
+		
+		
+		
 	}
 	
 	

@@ -20,6 +20,8 @@ public interface ProductService {
 	public Product getProduct(int prodNo) throws Exception;
 	public List<Product> getProductList(int memberNo) throws Exception;
 	public Map<String, Object> getAllProductList() throws Exception;
-	
+
+	public int starRating(Product product) throws Exception;
+	public List<Product> getBuyProductList(int memberNo) throws Exception;
 	
 }

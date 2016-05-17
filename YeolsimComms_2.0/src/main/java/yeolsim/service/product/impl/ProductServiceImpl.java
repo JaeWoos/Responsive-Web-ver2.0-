@@ -73,5 +73,17 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.getProductList(memberNo);
 	}
 
+	@Override
+	public int starRating(Product product) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.starRating(product);
+	}
+
+	@Override
+	public List<Product> getBuyProductList(int memberNo) throws Exception {
+		// TODO Auto-generated method stub
+		return productDAO.getBuyProductList(memberNo);
+	}
+
 
 }
