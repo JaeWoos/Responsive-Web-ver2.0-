@@ -19,6 +19,7 @@ public interface BuyDAO {
 	//delete
 	public void delBuy(int buyNo)throws Exception;
 	
+	public void updateTranNo(int buyNo)throws Exception;
 	
 	
 }

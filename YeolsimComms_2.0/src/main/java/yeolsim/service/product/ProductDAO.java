@@ -8,10 +8,7 @@ import java.util.Map;
 
 import yeolsim.service.domain.Product;
 
-/**
- * @author Administrator
- *
- */
+
 public interface ProductDAO {
 
 	//insert

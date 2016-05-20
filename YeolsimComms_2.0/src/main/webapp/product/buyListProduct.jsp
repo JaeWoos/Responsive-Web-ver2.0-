@@ -37,8 +37,9 @@
 				data:{
 					eachChk
 				},
-				success:function(){
-					console.log("gg")
+				success:function(data){
+					console.log("gg"+data)
+					location.reload();
 				}
 			}) 
 	    })
@@ -96,7 +97,7 @@
 				 	<div> <h3>${product.prodName }</h3></div>
 					<div> <h4>가 격 : ${product.price } 원</h4></div>
 					<div> <h4>설 명 : ${product.info } </h4></div>
-					<div> <h4>판매일 : ${product.buyProd.data}</h4></div> 
+					<div> <h4>판매일 : ${product.buyProd.data}</h4></div>
 					<c:choose>
 						<c:when test="${product.buyProd.tranNo==0 }">
 							<div> <h4>배송상태 : 배 송 준 비 </h4></div>

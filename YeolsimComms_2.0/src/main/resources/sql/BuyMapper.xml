@@ -49,6 +49,10 @@
 			and BUY_NO=#{value}
 	</select>
 	
+	<update id="updateTranNo" parameterType="int">
+		update buy set tran_No=1 where buy_No=#{value}
+	</update>
+	
 </mapper>
 
 

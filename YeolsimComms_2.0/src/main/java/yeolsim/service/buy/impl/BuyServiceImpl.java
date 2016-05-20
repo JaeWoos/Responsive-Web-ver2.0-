@@ -55,5 +55,11 @@ public class BuyServiceImpl implements BuyService {
 		return null;
 	}
 
+	@Override
+	public void updateTranNo(int buyNo) throws Exception {
+		// TODO Auto-generated method stub
+		buyDAO.updateTranNo(buyNo);
+	}
+
 
 }

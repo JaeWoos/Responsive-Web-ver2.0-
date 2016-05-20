@@ -94,7 +94,6 @@ public class BuyController {
 		return "forward:/buy/buyProduct.jsp";
 	}
 	
-	
 	@RequestMapping(value="/insertProduct", method=RequestMethod.POST)
 	public String insertProduct(@ModelAttribute BuyMember buyMember, @RequestParam("prodNo") List<Object> prodNo,
 									@RequestParam("pay") String menu, @RequestParam("totalBuy") List<Object> totalBuy,
@@ -138,7 +137,7 @@ public class BuyController {
 		
 		model.addAttribute("buyList", buyList);
 		
-		return null;
+		return "forward:/buy/buyListProduct.jsp";
 	}
 	
 	@RequestMapping(value="/insertProduct2", method=RequestMethod.POST)
@@ -205,10 +204,16 @@ public class BuyController {
 	}
 	
 	@RequestMapping(value="/updateTranNo", method=RequestMethod.POST)
-	public void updateTranNo(@RequestParam("eachChk[]") List<Object> tranNo, Model model )throws Exception{
+	public void updateTranNo(@RequestParam("eachChk[]") List<Object> list, Model model )throws Exception{
 		
-		System.out.println("/updateTranNo : POST :" +tranNo);
+		System.out.println("/updateTranNo : POST :" +list);
 		
+		for(int i=0; i<list.size(); i++){
+			int buyNo=Integer.parseInt((String) list.get(i));
+			System.out.println("gg :"+buyNo);
+			buyService.updateTranNo(buyNo);
+			
+		}
 		
 		
 	}

@@ -90,6 +90,7 @@
                     <a href="/product/insertProduct" class="list-group-item" >상품 등록</a>
                     <a href="/buket/getListBuket/${member.memberNo }" class="list-group-item"  >장바 구니</a>
                     <a href="/buy/getBuyList/${member.memberNo }" class="list-group-item"  >구매 목록</a>
+                    <a href="/product/buyProduct/${member.memberNo }" class="list-group-item"  >판매 관리</a>
                 </div>
             </div>
 

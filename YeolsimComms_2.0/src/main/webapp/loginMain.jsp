@@ -60,7 +60,6 @@
 
 		<div class="row" >
             <div class="col-md-9" style="margin-left: 10%;">
-            
                 <div class="row carousel-holder">
                     <div class="col-md-12">
                         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -94,9 +93,7 @@
                             </a>
                         </div>
                     </div> 
-
                 </div>
-
                 <div class="row">
 					<c:forEach var="product" items="${product }">
 					 <c:forEach var="men" items="${allMember }">
@@ -139,7 +136,6 @@
                 </div>
             </div>
         </footer>
-
     </div>
     <!-- /.container -->
 </body>

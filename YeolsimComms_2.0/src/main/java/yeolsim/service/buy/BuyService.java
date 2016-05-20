@@ -19,6 +19,6 @@ public interface BuyService {
 	public List<Buy> getBuyList(int memberNo) throws Exception;
 	Map<String, Object> getAllProductList() throws Exception;
 	
-	
+	public void updateTranNo(int buyNo)throws Exception;
 	
 }

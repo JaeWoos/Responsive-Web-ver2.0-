@@ -57,4 +57,10 @@ public class BuyDAOImpl implements BuyDAO {
 
 	}
 
+	@Override
+	public void updateTranNo(int buyNo) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("BuyMapper.updateTranNo", buyNo);
+	}
+
 }

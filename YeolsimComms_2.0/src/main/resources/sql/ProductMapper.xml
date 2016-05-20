@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd.mybatis-3-config.dtd">
 
 <mapper namespace="ProductMapper">
-
 	<resultMap id="ProductResultMap" type="Product">
 		<result property="prodNo" 		column="PROD_NO" 		jdbcType="INTEGER"/>
 		<result property="memberNo"		column="MEMBER_NO"		jdbcType="INTEGER" />
@@ -15,20 +14,18 @@
 		<result property="cate"			column="CATE" 			jdbcType="VARCHAR" />
 		
 		<association property="buyProd" javaType="buy">
-				<result property="buyNo"		column="buy_no"		jdbcType="INTEGER" />
+				<result property="buyNo"		column="buy_no"			jdbcType="INTEGER" />
 				<result property="memberNo"		column="member_no"		jdbcType="INTEGER" />
 				<result property="prodNo"		column="prod_no"		jdbcType="INTEGER" />		
 				<result property="data"			column="buy_date" 		jdbcType="DATE" />
+				<result property="tranNo"		column="tran_no"		jdbcType="INTEGER"/>
 		</association>
-		
 	</resultMap>
 	
 	<sql id="order">
 		order by data desc
 	</sql>
 	
-	
-	<!-- SQL : INSERT -->
 	<insert		id="insertProduct"	parameterType="Product" >
 	 	INSERT
 		INTO Product
