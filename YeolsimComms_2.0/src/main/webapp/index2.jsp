@@ -15,19 +15,23 @@
 	<link href="../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/css/test.css" media="all" rel="stylesheet">
 	
 	<script src="../resources/bootstrap/js/jquery.js" ></script>
     <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
     <script src="../../resources/bootstrap/js/star-rating.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     
     <script type="text/javascript">
+    
+    
      window.onload=function(){
+	    
     	 var temp=$("#check").val();
     	 console.log("gg"+temp);
     	 if(temp=="false"){
     		 alert("아이디와 비밀번호를 확인하세요.")
     	 }
-    	 
  
 	    $("#login").click(function(event){
 	    	var id=$("#navbar .form-group").find("input[name='Id']").val();
@@ -43,7 +47,54 @@
 			document.loginform.submit();
 			}
 	 	  })
+	 	  
+	 	$("#addClass").click(function(){
+			$('#qnimate').addClass('popup-box-on');
+			 var socket = io.connect('http://localhost:9000');
+			console.log("ggg")
+			
+	     	$("#removeClass").click(function () {
+	         	socket.emit("disconnect")	         
+	         $('#qnimate').removeClass('popup-box-on');
+	           });
+		    
+		    $("#status_message").keyup(function(){
+		    	if(event.keyCode==13){
+					var message= $("#status_message").val()
+	
+					$("#status_message").val('');
+					socket.emit("sendchat", message)
+				}
+		    })
+		    
+	     socket.on('updatechat', function (data) {
+	    	 console.log(data)
+	    	    $('.direct-chat-messages').append(
+	    	    	'<div class="direct-chat-info clearfix">'+
+	                  '<span class="direct-chat-name pull-left">user02</span></div>'+
+	                  '<div class="direct-chat-text">'+
+	                    data+
+	                  '</div>'
+	    	    		);
+	    	  });
+		    
+		 socket.on('updateusers', function (data) {
+		    	 console.log(data)
+		    	    $('.direct-chat-messages').append(
+		    	    	'<div class="direct-chat-info clearfix">'+
+		                  '<span class="direct-chat-name pull-left">user02</span></div>'+
+		                  '<div class="direct-chat-text">'+
+		                  		'상대방이 나갔습니다.'+
+		                  '</div>'
+		    	    		);
+		    	  });
+ 		})
+	    
+	    
+	    
+	    
      }
+     
      function keyDown(){
     	 if(event.keyCode==13){
     		 document.loginform.submit();
@@ -86,6 +137,7 @@
             </div>
 		      <button id="login" type="button" class="btn btn-success" >Sign in</button>
 		       <a href="/member/insertMember"><button id="member" type="button" class="btn btn-success">Sign up</button></a>
+		       <button id="addClass" type="button" class="btn btn-success" >test</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -170,7 +222,7 @@
 					 <div class="col-sm-4 col-lg-4 col-md-4">
                         <div class="thumbnail">
                         <a href="/product/getProduct/${product.prodNo }">
-                            <img src="/resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;">
+                            <img src="/resources/img/${product.pic }" alt="" style="width: 320px; height: 200px;"></a>
                               <div class="caption">
                                 <h4 class="pull-right">${product.price } 원</h4>
                                 <h4 title="${product.prodName }" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
@@ -179,12 +231,12 @@
                                 <p>${product.info }</p>
                             </div>
                             <div class="ratings">
-                                <p class="pull-right">${men.id }(${men.name })</p>
+                                <p class="pull-right" id="addClass">${men.id }(${men.name })</p>
                                 <div class="temp">
                                     <input class="star" value="${product.stat }" class="rating-loading" data-size="xs">
                                 </div>
                             </div>
-                            </a>
+                            
                         </div>
                     </div>
                     </c:if>
@@ -196,6 +248,35 @@
                     </div>
                 </div>
         </div>
+        
+        <div class="popup-box chat-popup" id="qnimate">
+    		  <div class="popup-head">
+				<h4>판매자와 1:1 채팅
+				<button data-widget="remove" id="removeClass" class="chat-header-button pull-right" type="button"><i class="glyphicon glyphicon-off"></i></button></h4>
+			  </div>
+			<div class="popup-messages">
+				<div class="direct-chat-messages">
+					<!-- Message. Default to the left -->
+                    <div class="direct-chat-msg doted-border">
+                      <div class="direct-chat-text">
+                       판매자에게 대화를 요청해 주세요
+                      </div>
+                      
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                  </div>
+			</div>
+			<div class="popup-messages-footer">
+			<textarea id="status_message" placeholder="판매자와 1:1 상담" rows="10" cols="40" name="message"></textarea>
+			<div class="btn-footer">
+			<button class="bg_none"><i class="glyphicon glyphicon-film"></i> </button>
+			<button class="bg_none"><i class="glyphicon glyphicon-camera"></i> </button>
+            <button class="bg_none"><i class="glyphicon glyphicon-paperclip"></i> </button>
+			<button class="bg_none pull-right"><i class="glyphicon glyphicon-thumbs-up"></i> </button>
+			</div>
+			</div>
+	  </div>
+        
     <!-- /.container -->
     <div class="container">
         <hr>
