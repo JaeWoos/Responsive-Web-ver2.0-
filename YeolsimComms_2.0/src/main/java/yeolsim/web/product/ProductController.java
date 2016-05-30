@@ -169,7 +169,7 @@ public class ProductController {
 		List<Product> prodList=(List<Product>)productService.getBuyProductList(memberNo);
 		
 		System.out.println("Gg"+prodList);
-		model.addAttribute("buyList", prodList);
+		model.addAttribute("buyList", prodList); 
 		
 		return "forward:/product/buyListProduct.jsp";
 	}

@@ -1,7 +1,10 @@
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +33,6 @@ public class testController {
 	@Autowired
 	@Qualifier("MemberServiceImpl")
 	private MemberService memberService;
-	
 
 	@Autowired
 	@Qualifier("ProductServiceImpl")
@@ -48,18 +50,20 @@ public class testController {
 	@Qualifier("buyMemberServiceImpl")
 	private BuyMemberService buyMemberService;
 
-	//@Test
+	@Test
 	public void insertMember() throws Exception{
 		Member member = new Member();
-		member.setId("user04");
-		member.setPassword("1234");
-		member.setPhone("123123123");
-		member.setAddr("서울시 강남구");
-		member.setEmail("user01@nabve.com");
-		member.setName("홍길동");
-		member.setSex("남");
+		member.setId("user05");
+		member.setPassword("7777");
+		member.setPhone("987654321");
+		member.setAddr("서울시 테스트용 test!!");
+		member.setEmail("test01@test.com");
+		member.setName("테스트");
+		member.setSex("남여");
 		System.out.println("junit 시작");
 		memberService.insertMember(member);
+		
+		assertEquals(member.getId(), memberService.getMember("user05").getId());
 	}
 	
 	//@Test
@@ -82,7 +86,7 @@ public class testController {
 	//@Test
 	public void getListBuket()throws Exception{
 		
-		List<Buket> buketList=buketService.addBuketList(1000040);
+		List<Buket> buketList=buketService.addBuketList(10000);
 		System.out.println("test :"+buketList);
 		System.out.println(buketList.get(0).getBuketProd());
 		
@@ -93,7 +97,7 @@ public class testController {
 		System.out.println("test2: "+prodList);
 	}
 	
-	@Test
+	//@Test
 	public void buyProduct()throws Exception{
 
 		Buy buy=new Buy();

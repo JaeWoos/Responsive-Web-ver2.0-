@@ -21,6 +21,4 @@
 					pointcut="execution(* yeolsim.service..*Impl.*(..) )"	method="invoke"/>
 	 	</aop:aspect>
 	 </aop:config>
-
-
 </beans>

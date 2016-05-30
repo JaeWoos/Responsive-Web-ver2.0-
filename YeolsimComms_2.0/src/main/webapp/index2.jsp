@@ -14,7 +14,7 @@
 	<link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../resources/bootstrap/css/shop-homepage.css" rel="stylesheet">
 	<link href="../../resources/bootstrap/css/star-rating.min.css" media="all" rel="stylesheet">
-	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" media="all" rel="stylesheet">
+	<link href="../../resources/bootstrap/css/theme-krajee-svg.min.css" medCopyright © Yeolsim Comms 2016ia="all" rel="stylesheet">
 	<link href="../../resources/css/test.css" media="all" rel="stylesheet">
 	
 	<script src="../resources/bootstrap/js/jquery.js" ></script>
